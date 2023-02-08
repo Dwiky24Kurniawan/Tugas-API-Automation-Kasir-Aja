@@ -688,7 +688,7 @@ describe('Kasir Aja API Test', function () {
                 done()
             })
     })
-    
+
     //Transaction - Get List Sales Data
     it('Should successfully get list sales data', (done) => {
         request(baseUrl)
@@ -753,8 +753,8 @@ describe('Kasir Aja API Test', function () {
         request(baseUrl)
             .get('/purchases/' + purchaseId)
             .query({
-                startDate: 2023-01-29,
-                endDate: 2023-01-30,
+                startDate: 2023 - 01 - 29,
+                endDate: 2023 - 01 - 30,
                 q: "",
                 page: ""
             })
@@ -808,4 +808,3 @@ describe('Kasir Aja API Test', function () {
             })
     })
 })
-
