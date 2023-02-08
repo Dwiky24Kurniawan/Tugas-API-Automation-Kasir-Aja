@@ -4,7 +4,7 @@
   "description": "Tugas API Automation Kasir Aja",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha **/*testKasirAjaAPI.js"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,7 @@
     "chai": "^4.3.7",
     "express": "^4.18.2",
     "mocha": "^10.2.0",
+    "mochawesome": "^7.1.3",
     "supertest": "^6.3.3"
   }
 }

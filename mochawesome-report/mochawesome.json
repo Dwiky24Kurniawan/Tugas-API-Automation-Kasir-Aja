@@ -1,0 +1,612 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 33,
+    "passes": 33,
+    "pending": 0,
+    "failures": 0,
+    "start": "2023-02-08T08:34:35.244Z",
+    "end": "2023-02-08T08:34:40.269Z",
+    "duration": 5025
+  },
+  "tests": [
+    {
+      "title": "Should successfully create user registration",
+      "fullTitle": "Kasir Aja API Test Should successfully create user registration",
+      "file": "D:\\SANBERCODE\\QA-AUTOMATION\\TUGAS-API-AUTOMATION\\Tugas-API-Automation-Kasir-Aja\\test\\testKasirAjaAPI.js",
+      "duration": 400,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "Should successfully login",
+      "fullTitle": "Kasir Aja API Test Should successfully login",
+      "file": "D:\\SANBERCODE\\QA-AUTOMATION\\TUGAS-API-AUTOMATION\\Tugas-API-Automation-Kasir-Aja\\test\\testKasirAjaAPI.js",
+      "duration": 412,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "Should successfully create user",
+      "fullTitle": "Kasir Aja API Test Should successfully create user",
+      "file": "D:\\SANBERCODE\\QA-AUTOMATION\\TUGAS-API-AUTOMATION\\Tugas-API-Automation-Kasir-Aja\\test\\testKasirAjaAPI.js",
+      "duration": 397,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "Should successfully get user detail",
+      "fullTitle": "Kasir Aja API Test Should successfully get user detail",
+      "file": "D:\\SANBERCODE\\QA-AUTOMATION\\TUGAS-API-AUTOMATION\\Tugas-API-Automation-Kasir-Aja\\test\\testKasirAjaAPI.js",
+      "duration": 92,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "Should successfully get user list",
+      "fullTitle": "Kasir Aja API Test Should successfully get user list",
+      "file": "D:\\SANBERCODE\\QA-AUTOMATION\\TUGAS-API-AUTOMATION\\Tugas-API-Automation-Kasir-Aja\\test\\testKasirAjaAPI.js",
+      "duration": 98,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "Should successfully update user",
+      "fullTitle": "Kasir Aja API Test Should successfully update user",
+      "file": "D:\\SANBERCODE\\QA-AUTOMATION\\TUGAS-API-AUTOMATION\\Tugas-API-Automation-Kasir-Aja\\test\\testKasirAjaAPI.js",
+      "duration": 108,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "Should successfully delete user",
+      "fullTitle": "Kasir Aja API Test Should successfully delete user",
+      "file": "D:\\SANBERCODE\\QA-AUTOMATION\\TUGAS-API-AUTOMATION\\Tugas-API-Automation-Kasir-Aja\\test\\testKasirAjaAPI.js",
+      "duration": 96,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "Should successfully add unit",
+      "fullTitle": "Kasir Aja API Test Should successfully add unit",
+      "file": "D:\\SANBERCODE\\QA-AUTOMATION\\TUGAS-API-AUTOMATION\\Tugas-API-Automation-Kasir-Aja\\test\\testKasirAjaAPI.js",
+      "duration": 95,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "Should successfully get unit detail",
+      "fullTitle": "Kasir Aja API Test Should successfully get unit detail",
+      "file": "D:\\SANBERCODE\\QA-AUTOMATION\\TUGAS-API-AUTOMATION\\Tugas-API-Automation-Kasir-Aja\\test\\testKasirAjaAPI.js",
+      "duration": 98,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "Should successfully get unit list",
+      "fullTitle": "Kasir Aja API Test Should successfully get unit list",
+      "file": "D:\\SANBERCODE\\QA-AUTOMATION\\TUGAS-API-AUTOMATION\\Tugas-API-Automation-Kasir-Aja\\test\\testKasirAjaAPI.js",
+      "duration": 98,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "Should successfully update unit",
+      "fullTitle": "Kasir Aja API Test Should successfully update unit",
+      "file": "D:\\SANBERCODE\\QA-AUTOMATION\\TUGAS-API-AUTOMATION\\Tugas-API-Automation-Kasir-Aja\\test\\testKasirAjaAPI.js",
+      "duration": 92,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "Should successfully update unit",
+      "fullTitle": "Kasir Aja API Test Should successfully update unit",
+      "file": "D:\\SANBERCODE\\QA-AUTOMATION\\TUGAS-API-AUTOMATION\\Tugas-API-Automation-Kasir-Aja\\test\\testKasirAjaAPI.js",
+      "duration": 94,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "Should successfully add category",
+      "fullTitle": "Kasir Aja API Test Should successfully add category",
+      "file": "D:\\SANBERCODE\\QA-AUTOMATION\\TUGAS-API-AUTOMATION\\Tugas-API-Automation-Kasir-Aja\\test\\testKasirAjaAPI.js",
+      "duration": 93,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "Should successfully get category detail",
+      "fullTitle": "Kasir Aja API Test Should successfully get category detail",
+      "file": "D:\\SANBERCODE\\QA-AUTOMATION\\TUGAS-API-AUTOMATION\\Tugas-API-Automation-Kasir-Aja\\test\\testKasirAjaAPI.js",
+      "duration": 100,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "Should successfully get category list",
+      "fullTitle": "Kasir Aja API Test Should successfully get category list",
+      "file": "D:\\SANBERCODE\\QA-AUTOMATION\\TUGAS-API-AUTOMATION\\Tugas-API-Automation-Kasir-Aja\\test\\testKasirAjaAPI.js",
+      "duration": 95,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "Should successfully update category",
+      "fullTitle": "Kasir Aja API Test Should successfully update category",
+      "file": "D:\\SANBERCODE\\QA-AUTOMATION\\TUGAS-API-AUTOMATION\\Tugas-API-Automation-Kasir-Aja\\test\\testKasirAjaAPI.js",
+      "duration": 98,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "Should successfully delete category",
+      "fullTitle": "Kasir Aja API Test Should successfully delete category",
+      "file": "D:\\SANBERCODE\\QA-AUTOMATION\\TUGAS-API-AUTOMATION\\Tugas-API-Automation-Kasir-Aja\\test\\testKasirAjaAPI.js",
+      "duration": 106,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "Should successfully add customer",
+      "fullTitle": "Kasir Aja API Test Should successfully add customer",
+      "file": "D:\\SANBERCODE\\QA-AUTOMATION\\TUGAS-API-AUTOMATION\\Tugas-API-Automation-Kasir-Aja\\test\\testKasirAjaAPI.js",
+      "duration": 91,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "Should successfully get customer detail",
+      "fullTitle": "Kasir Aja API Test Should successfully get customer detail",
+      "file": "D:\\SANBERCODE\\QA-AUTOMATION\\TUGAS-API-AUTOMATION\\Tugas-API-Automation-Kasir-Aja\\test\\testKasirAjaAPI.js",
+      "duration": 110,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "Should successfully get customer list",
+      "fullTitle": "Kasir Aja API Test Should successfully get customer list",
+      "file": "D:\\SANBERCODE\\QA-AUTOMATION\\TUGAS-API-AUTOMATION\\Tugas-API-Automation-Kasir-Aja\\test\\testKasirAjaAPI.js",
+      "duration": 102,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "Should successfully update customer",
+      "fullTitle": "Kasir Aja API Test Should successfully update customer",
+      "file": "D:\\SANBERCODE\\QA-AUTOMATION\\TUGAS-API-AUTOMATION\\Tugas-API-Automation-Kasir-Aja\\test\\testKasirAjaAPI.js",
+      "duration": 99,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "Should successfully delete unit",
+      "fullTitle": "Kasir Aja API Test Should successfully delete unit",
+      "file": "D:\\SANBERCODE\\QA-AUTOMATION\\TUGAS-API-AUTOMATION\\Tugas-API-Automation-Kasir-Aja\\test\\testKasirAjaAPI.js",
+      "duration": 124,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "Should successfully add product",
+      "fullTitle": "Kasir Aja API Test Should successfully add product",
+      "file": "D:\\SANBERCODE\\QA-AUTOMATION\\TUGAS-API-AUTOMATION\\Tugas-API-Automation-Kasir-Aja\\test\\testKasirAjaAPI.js",
+      "duration": 138,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "Should successfully get product detail",
+      "fullTitle": "Kasir Aja API Test Should successfully get product detail",
+      "file": "D:\\SANBERCODE\\QA-AUTOMATION\\TUGAS-API-AUTOMATION\\Tugas-API-Automation-Kasir-Aja\\test\\testKasirAjaAPI.js",
+      "duration": 156,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "Should successfully get product list",
+      "fullTitle": "Kasir Aja API Test Should successfully get product list",
+      "file": "D:\\SANBERCODE\\QA-AUTOMATION\\TUGAS-API-AUTOMATION\\Tugas-API-Automation-Kasir-Aja\\test\\testKasirAjaAPI.js",
+      "duration": 158,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "Should successfully update product",
+      "fullTitle": "Kasir Aja API Test Should successfully update product",
+      "file": "D:\\SANBERCODE\\QA-AUTOMATION\\TUGAS-API-AUTOMATION\\Tugas-API-Automation-Kasir-Aja\\test\\testKasirAjaAPI.js",
+      "duration": 105,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "Should successfully delete product",
+      "fullTitle": "Kasir Aja API Test Should successfully delete product",
+      "file": "D:\\SANBERCODE\\QA-AUTOMATION\\TUGAS-API-AUTOMATION\\Tugas-API-Automation-Kasir-Aja\\test\\testKasirAjaAPI.js",
+      "duration": 118,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "Should successfully add sales",
+      "fullTitle": "Kasir Aja API Test Should successfully add sales",
+      "file": "D:\\SANBERCODE\\QA-AUTOMATION\\TUGAS-API-AUTOMATION\\Tugas-API-Automation-Kasir-Aja\\test\\testKasirAjaAPI.js",
+      "duration": 101,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "Should successfully get list sales data",
+      "fullTitle": "Kasir Aja API Test Should successfully get list sales data",
+      "file": "D:\\SANBERCODE\\QA-AUTOMATION\\TUGAS-API-AUTOMATION\\Tugas-API-Automation-Kasir-Aja\\test\\testKasirAjaAPI.js",
+      "duration": 115,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "Should successfully get sales order data",
+      "fullTitle": "Kasir Aja API Test Should successfully get sales order data",
+      "file": "D:\\SANBERCODE\\QA-AUTOMATION\\TUGAS-API-AUTOMATION\\Tugas-API-Automation-Kasir-Aja\\test\\testKasirAjaAPI.js",
+      "duration": 112,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "Should successfully add transaction",
+      "fullTitle": "Kasir Aja API Test Should successfully add transaction",
+      "file": "D:\\SANBERCODE\\QA-AUTOMATION\\TUGAS-API-AUTOMATION\\Tugas-API-Automation-Kasir-Aja\\test\\testKasirAjaAPI.js",
+      "duration": 105,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "Should successfully get list of transaction",
+      "fullTitle": "Kasir Aja API Test Should successfully get list of transaction",
+      "file": "D:\\SANBERCODE\\QA-AUTOMATION\\TUGAS-API-AUTOMATION\\Tugas-API-Automation-Kasir-Aja\\test\\testKasirAjaAPI.js",
+      "duration": 127,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "Should successfully get transaction detail",
+      "fullTitle": "Kasir Aja API Test Should successfully get transaction detail",
+      "file": "D:\\SANBERCODE\\QA-AUTOMATION\\TUGAS-API-AUTOMATION\\Tugas-API-Automation-Kasir-Aja\\test\\testKasirAjaAPI.js",
+      "duration": 137,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    }
+  ],
+  "pending": [],
+  "failures": [],
+  "passes": [
+    {
+      "title": "Should successfully create user registration",
+      "fullTitle": "Kasir Aja API Test Should successfully create user registration",
+      "file": "D:\\SANBERCODE\\QA-AUTOMATION\\TUGAS-API-AUTOMATION\\Tugas-API-Automation-Kasir-Aja\\test\\testKasirAjaAPI.js",
+      "duration": 400,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "Should successfully login",
+      "fullTitle": "Kasir Aja API Test Should successfully login",
+      "file": "D:\\SANBERCODE\\QA-AUTOMATION\\TUGAS-API-AUTOMATION\\Tugas-API-Automation-Kasir-Aja\\test\\testKasirAjaAPI.js",
+      "duration": 412,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "Should successfully create user",
+      "fullTitle": "Kasir Aja API Test Should successfully create user",
+      "file": "D:\\SANBERCODE\\QA-AUTOMATION\\TUGAS-API-AUTOMATION\\Tugas-API-Automation-Kasir-Aja\\test\\testKasirAjaAPI.js",
+      "duration": 397,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "Should successfully get user detail",
+      "fullTitle": "Kasir Aja API Test Should successfully get user detail",
+      "file": "D:\\SANBERCODE\\QA-AUTOMATION\\TUGAS-API-AUTOMATION\\Tugas-API-Automation-Kasir-Aja\\test\\testKasirAjaAPI.js",
+      "duration": 92,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "Should successfully get user list",
+      "fullTitle": "Kasir Aja API Test Should successfully get user list",
+      "file": "D:\\SANBERCODE\\QA-AUTOMATION\\TUGAS-API-AUTOMATION\\Tugas-API-Automation-Kasir-Aja\\test\\testKasirAjaAPI.js",
+      "duration": 98,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "Should successfully update user",
+      "fullTitle": "Kasir Aja API Test Should successfully update user",
+      "file": "D:\\SANBERCODE\\QA-AUTOMATION\\TUGAS-API-AUTOMATION\\Tugas-API-Automation-Kasir-Aja\\test\\testKasirAjaAPI.js",
+      "duration": 108,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "Should successfully delete user",
+      "fullTitle": "Kasir Aja API Test Should successfully delete user",
+      "file": "D:\\SANBERCODE\\QA-AUTOMATION\\TUGAS-API-AUTOMATION\\Tugas-API-Automation-Kasir-Aja\\test\\testKasirAjaAPI.js",
+      "duration": 96,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "Should successfully add unit",
+      "fullTitle": "Kasir Aja API Test Should successfully add unit",
+      "file": "D:\\SANBERCODE\\QA-AUTOMATION\\TUGAS-API-AUTOMATION\\Tugas-API-Automation-Kasir-Aja\\test\\testKasirAjaAPI.js",
+      "duration": 95,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "Should successfully get unit detail",
+      "fullTitle": "Kasir Aja API Test Should successfully get unit detail",
+      "file": "D:\\SANBERCODE\\QA-AUTOMATION\\TUGAS-API-AUTOMATION\\Tugas-API-Automation-Kasir-Aja\\test\\testKasirAjaAPI.js",
+      "duration": 98,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "Should successfully get unit list",
+      "fullTitle": "Kasir Aja API Test Should successfully get unit list",
+      "file": "D:\\SANBERCODE\\QA-AUTOMATION\\TUGAS-API-AUTOMATION\\Tugas-API-Automation-Kasir-Aja\\test\\testKasirAjaAPI.js",
+      "duration": 98,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "Should successfully update unit",
+      "fullTitle": "Kasir Aja API Test Should successfully update unit",
+      "file": "D:\\SANBERCODE\\QA-AUTOMATION\\TUGAS-API-AUTOMATION\\Tugas-API-Automation-Kasir-Aja\\test\\testKasirAjaAPI.js",
+      "duration": 92,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "Should successfully update unit",
+      "fullTitle": "Kasir Aja API Test Should successfully update unit",
+      "file": "D:\\SANBERCODE\\QA-AUTOMATION\\TUGAS-API-AUTOMATION\\Tugas-API-Automation-Kasir-Aja\\test\\testKasirAjaAPI.js",
+      "duration": 94,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "Should successfully add category",
+      "fullTitle": "Kasir Aja API Test Should successfully add category",
+      "file": "D:\\SANBERCODE\\QA-AUTOMATION\\TUGAS-API-AUTOMATION\\Tugas-API-Automation-Kasir-Aja\\test\\testKasirAjaAPI.js",
+      "duration": 93,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "Should successfully get category detail",
+      "fullTitle": "Kasir Aja API Test Should successfully get category detail",
+      "file": "D:\\SANBERCODE\\QA-AUTOMATION\\TUGAS-API-AUTOMATION\\Tugas-API-Automation-Kasir-Aja\\test\\testKasirAjaAPI.js",
+      "duration": 100,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "Should successfully get category list",
+      "fullTitle": "Kasir Aja API Test Should successfully get category list",
+      "file": "D:\\SANBERCODE\\QA-AUTOMATION\\TUGAS-API-AUTOMATION\\Tugas-API-Automation-Kasir-Aja\\test\\testKasirAjaAPI.js",
+      "duration": 95,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "Should successfully update category",
+      "fullTitle": "Kasir Aja API Test Should successfully update category",
+      "file": "D:\\SANBERCODE\\QA-AUTOMATION\\TUGAS-API-AUTOMATION\\Tugas-API-Automation-Kasir-Aja\\test\\testKasirAjaAPI.js",
+      "duration": 98,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "Should successfully delete category",
+      "fullTitle": "Kasir Aja API Test Should successfully delete category",
+      "file": "D:\\SANBERCODE\\QA-AUTOMATION\\TUGAS-API-AUTOMATION\\Tugas-API-Automation-Kasir-Aja\\test\\testKasirAjaAPI.js",
+      "duration": 106,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "Should successfully add customer",
+      "fullTitle": "Kasir Aja API Test Should successfully add customer",
+      "file": "D:\\SANBERCODE\\QA-AUTOMATION\\TUGAS-API-AUTOMATION\\Tugas-API-Automation-Kasir-Aja\\test\\testKasirAjaAPI.js",
+      "duration": 91,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "Should successfully get customer detail",
+      "fullTitle": "Kasir Aja API Test Should successfully get customer detail",
+      "file": "D:\\SANBERCODE\\QA-AUTOMATION\\TUGAS-API-AUTOMATION\\Tugas-API-Automation-Kasir-Aja\\test\\testKasirAjaAPI.js",
+      "duration": 110,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "Should successfully get customer list",
+      "fullTitle": "Kasir Aja API Test Should successfully get customer list",
+      "file": "D:\\SANBERCODE\\QA-AUTOMATION\\TUGAS-API-AUTOMATION\\Tugas-API-Automation-Kasir-Aja\\test\\testKasirAjaAPI.js",
+      "duration": 102,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "Should successfully update customer",
+      "fullTitle": "Kasir Aja API Test Should successfully update customer",
+      "file": "D:\\SANBERCODE\\QA-AUTOMATION\\TUGAS-API-AUTOMATION\\Tugas-API-Automation-Kasir-Aja\\test\\testKasirAjaAPI.js",
+      "duration": 99,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "Should successfully delete unit",
+      "fullTitle": "Kasir Aja API Test Should successfully delete unit",
+      "file": "D:\\SANBERCODE\\QA-AUTOMATION\\TUGAS-API-AUTOMATION\\Tugas-API-Automation-Kasir-Aja\\test\\testKasirAjaAPI.js",
+      "duration": 124,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "Should successfully add product",
+      "fullTitle": "Kasir Aja API Test Should successfully add product",
+      "file": "D:\\SANBERCODE\\QA-AUTOMATION\\TUGAS-API-AUTOMATION\\Tugas-API-Automation-Kasir-Aja\\test\\testKasirAjaAPI.js",
+      "duration": 138,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "Should successfully get product detail",
+      "fullTitle": "Kasir Aja API Test Should successfully get product detail",
+      "file": "D:\\SANBERCODE\\QA-AUTOMATION\\TUGAS-API-AUTOMATION\\Tugas-API-Automation-Kasir-Aja\\test\\testKasirAjaAPI.js",
+      "duration": 156,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "Should successfully get product list",
+      "fullTitle": "Kasir Aja API Test Should successfully get product list",
+      "file": "D:\\SANBERCODE\\QA-AUTOMATION\\TUGAS-API-AUTOMATION\\Tugas-API-Automation-Kasir-Aja\\test\\testKasirAjaAPI.js",
+      "duration": 158,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "Should successfully update product",
+      "fullTitle": "Kasir Aja API Test Should successfully update product",
+      "file": "D:\\SANBERCODE\\QA-AUTOMATION\\TUGAS-API-AUTOMATION\\Tugas-API-Automation-Kasir-Aja\\test\\testKasirAjaAPI.js",
+      "duration": 105,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "Should successfully delete product",
+      "fullTitle": "Kasir Aja API Test Should successfully delete product",
+      "file": "D:\\SANBERCODE\\QA-AUTOMATION\\TUGAS-API-AUTOMATION\\Tugas-API-Automation-Kasir-Aja\\test\\testKasirAjaAPI.js",
+      "duration": 118,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "Should successfully add sales",
+      "fullTitle": "Kasir Aja API Test Should successfully add sales",
+      "file": "D:\\SANBERCODE\\QA-AUTOMATION\\TUGAS-API-AUTOMATION\\Tugas-API-Automation-Kasir-Aja\\test\\testKasirAjaAPI.js",
+      "duration": 101,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "Should successfully get list sales data",
+      "fullTitle": "Kasir Aja API Test Should successfully get list sales data",
+      "file": "D:\\SANBERCODE\\QA-AUTOMATION\\TUGAS-API-AUTOMATION\\Tugas-API-Automation-Kasir-Aja\\test\\testKasirAjaAPI.js",
+      "duration": 115,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "Should successfully get sales order data",
+      "fullTitle": "Kasir Aja API Test Should successfully get sales order data",
+      "file": "D:\\SANBERCODE\\QA-AUTOMATION\\TUGAS-API-AUTOMATION\\Tugas-API-Automation-Kasir-Aja\\test\\testKasirAjaAPI.js",
+      "duration": 112,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "Should successfully add transaction",
+      "fullTitle": "Kasir Aja API Test Should successfully add transaction",
+      "file": "D:\\SANBERCODE\\QA-AUTOMATION\\TUGAS-API-AUTOMATION\\Tugas-API-Automation-Kasir-Aja\\test\\testKasirAjaAPI.js",
+      "duration": 105,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "Should successfully get list of transaction",
+      "fullTitle": "Kasir Aja API Test Should successfully get list of transaction",
+      "file": "D:\\SANBERCODE\\QA-AUTOMATION\\TUGAS-API-AUTOMATION\\Tugas-API-Automation-Kasir-Aja\\test\\testKasirAjaAPI.js",
+      "duration": 127,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "Should successfully get transaction detail",
+      "fullTitle": "Kasir Aja API Test Should successfully get transaction detail",
+      "file": "D:\\SANBERCODE\\QA-AUTOMATION\\TUGAS-API-AUTOMATION\\Tugas-API-Automation-Kasir-Aja\\test\\testKasirAjaAPI.js",
+      "duration": 137,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    }
+  ]
+}
