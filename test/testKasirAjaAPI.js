@@ -14,6 +14,7 @@ const addTransaction = require('../testData/addTransaction.json')
 describe('Kasir Aja API Test', function () {
 
     var token
+    var officeId
     var userId
     var unitId
     var categoryId
@@ -44,10 +45,10 @@ describe('Kasir Aja API Test', function () {
                 expect(response.body.status).to.be.equal('success')
                 expect(response.body.message).to.be.equal('Toko berhasil didaftarkan')
                 expect(response.body.data.name).not.to.be.null
-                expect(response.body.data.email).not.to.be.null
-                expect(response.body.data.password).not.to.be.null
                 expect(response.body.data.name).to.be.equal(userRegistration.name)
+                expect(response.body.data.email).not.to.be.null
                 expect(response.body.data.email).to.be.equal(userRegistration.email)
+                expect(response.body.data.password).not.to.be.null
                 if (err) {
                     throw err
                 }
@@ -75,6 +76,7 @@ describe('Kasir Aja API Test', function () {
                 expect(response.body.data.user.email).to.be.equal(userRegistration.email)
                 expect(response.body.data.user.company_name).not.to.be.null
                 expect(response.body.data.user.company_name).to.be.equal(userRegistration.name)
+                // console.log(response.body)
                 if (err) {
                     throw err
                 }
@@ -234,8 +236,8 @@ describe('Kasir Aja API Test', function () {
                 expect(response.statusCode).to.be.equal(200)
                 expect(response.body.status).to.be.equal('success')
                 expect(response.body.data.unit.name).not.to.be.null
-                expect(response.body.data.unit.description).not.to.be.null
                 expect(response.body.data.unit.name).to.be.equal(addUnit.name)
+                expect(response.body.data.unit.description).not.to.be.null
                 expect(response.body.data.unit.description).to.be.equal(addUnit.description)
                 // console.log(response.body)
                 if (err) {
@@ -666,7 +668,7 @@ describe('Kasir Aja API Test', function () {
     //================================================================================
     //Endpoint /sales
     //Transaction - Add Sale
-    it('Should successfully add sale', (done) => {
+    it('Should successfully add sales', (done) => {
         request(baseUrl)
             .post('/sales')
             .send(addSales)
@@ -674,9 +676,10 @@ describe('Kasir Aja API Test', function () {
             .set('Content-Type', 'application/json')
             .set('Authorization', 'bearer ' + token)
             .end(function (err, response) {
-                expect(response.statusCode).to.be.equal(200)
-                // expect(response.body.status).to.be.equal('success')
-                // expect(response.body.message).to.be.equal('transaksi ditambahkan')
+                expect(response.statusCode).to.be.equal(201)
+                expect(response.body.status).to.be.equal('success')
+                expect(response.body.message).to.be.equal('transaksi ditambahkan')
+                expect(response.body.data.saleId).not.to.be.null
                 saleId = response.body.data.saleId
                 if (err) {
                     throw err
@@ -726,17 +729,18 @@ describe('Kasir Aja API Test', function () {
     //Transaction - Add Transaction
     it('Should successfully add transaction', (done) => {
         request(baseUrl)
-            .put('/purchases')
+            .post('/purchases')
             .send(addTransaction)
             .set('Accept', 'application/json')
             .set('Content-Type', 'application/json')
             .set('Authorization', 'bearer ' + token)
             .end(function (err, response) {
-                expect(response.statusCode).to.be.equal(200)
+                expect(response.statusCode).to.be.equal(201)
                 expect(response.body.status).to.be.equal('success')
-                // expect(response.body.message).to.be.equal('transaksi ditambahkan')
-                 console.log(response.body)
-                 purchaseId = response.body.data.purchaseId
+                expect(response.body.message).to.be.equal('transaksi ditambahkan')
+                expect(response.body.data.purchaseId).not.to.be.null
+                // console.log(response.body)
+                purchaseId = response.body.data.purchaseId
                 if (err) {
                     throw err
                 }
@@ -749,8 +753,8 @@ describe('Kasir Aja API Test', function () {
         request(baseUrl)
             .get('/purchases/' + purchaseId)
             .query({
-                startDate: "2023-01-29",
-                endDate: "2023-01-30",
+                startDate: 2023-01-29,
+                endDate: 2023-01-30,
                 q: "",
                 page: ""
             })
@@ -760,16 +764,39 @@ describe('Kasir Aja API Test', function () {
             .end(function (err, response) {
                 expect(response.statusCode).to.be.equal(200)
                 expect(response.body.status).to.be.equal('success')
-                // expect(response.body.data.product.code).not.to.be.null
-                // expect(response.body.data.product.code).to.be.equal(addProduct.code)
-                // expect(response.body.data.product.name).not.to.be.null
-                // expect(response.body.data.product.name).to.be.equal(addProduct.name)
-                // expect(response.body.data.product.price).not.to.be.null
-                // expect(response.body.data.product.price).to.be.equal(parseInt(addProduct.price))
-                // expect(response.body.data.product.cost).not.to.be.null
-                // expect(response.body.data.product.cost).to.be.equal(parseInt(addProduct.cost))
-                // expect(response.body.data.product.stock).not.to.be.null
-                // expect(response.body.data.product.stock).to.be.equal(parseInt(addProduct.stock))
+                expect(response.body.data.purchase.date).not.to.be.null
+                expect(response.body.data.purchase.invoice).not.to.be.null
+                expect(response.body.data.purchase.invoice).to.be.equal(addTransaction.invoice)
+                expect(response.body.data.purchase.description).not.to.be.null
+                expect(response.body.data.purchase.description).to.be.equal(addTransaction.description)
+                expect(response.body.data.purchase.amount).not.to.be.null
+                expect(response.body.data.purchase.amount).to.be.equal(addTransaction.amount)
+                expect(response.body.data.purchase.discount).not.to.be.null
+                expect(response.body.data.purchase.discount).to.be.equal(addTransaction.discount)
+                // console.log(response.body)
+                done()
+            })
+    })
+
+    //Transaction - Get Transaction Detail
+    it('Should successfully get transaction detail', (done) => {
+        request(baseUrl)
+            .get('/purchases/' + purchaseId)
+            .set('Accept', 'application/json')
+            .set('Content-Type', 'application/json')
+            .set('Authorization', 'bearer ' + token)
+            .end(function (err, response) {
+                expect(response.statusCode).to.be.equal(200)
+                expect(response.body.status).to.be.equal('success')
+                expect(response.body.data.purchase.date).not.to.be.null
+                expect(response.body.data.purchase.invoice).not.to.be.null
+                expect(response.body.data.purchase.invoice).to.be.equal(addTransaction.invoice)
+                expect(response.body.data.purchase.description).not.to.be.null
+                expect(response.body.data.purchase.description).to.be.equal(addTransaction.description)
+                expect(response.body.data.purchase.amount).not.to.be.null
+                expect(response.body.data.purchase.amount).to.be.equal(addTransaction.amount)
+                expect(response.body.data.purchase.discount).not.to.be.null
+                expect(response.body.data.purchase.discount).to.be.equal(addTransaction.discount)
                 // console.log(response.body)
                 done()
             })
