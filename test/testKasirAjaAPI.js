@@ -774,6 +774,9 @@ describe('Kasir Aja API Test', function () {
                 expect(response.body.data.purchase.discount).not.to.be.null
                 expect(response.body.data.purchase.discount).to.be.equal(addTransaction.discount)
                 // console.log(response.body)
+                if (err) {
+                    throw err
+                }
                 done()
             })
     })
@@ -798,6 +801,9 @@ describe('Kasir Aja API Test', function () {
                 expect(response.body.data.purchase.discount).not.to.be.null
                 expect(response.body.data.purchase.discount).to.be.equal(addTransaction.discount)
                 // console.log(response.body)
+                if (err) {
+                    throw err
+                }
                 done()
             })
     })
