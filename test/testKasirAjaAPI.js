@@ -14,7 +14,6 @@ const addTransaction = require('../testData/addTransaction.json')
 describe('Kasir Aja API Test', function () {
 
     var token
-    var officeId
     var userId
     var unitId
     var categoryId
