@@ -1,0 +1,25 @@
+{
+  "name": "tugas-api-automation-kasir-aja",
+  "version": "1.0.0",
+  "description": "Tugas API Automation Kasir Aja",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dwiky24Kurniawan/Tugas-API-Automation-Kasir-Aja.git"
+  },
+  "author": "Dwiky Kurniawan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Dwiky24Kurniawan/Tugas-API-Automation-Kasir-Aja/issues"
+  },
+  "homepage": "https://github.com/Dwiky24Kurniawan/Tugas-API-Automation-Kasir-Aja#readme",
+  "dependencies": {
+    "chai": "^4.3.7",
+    "express": "^4.18.2",
+    "mocha": "^10.2.0",
+    "supertest": "^6.3.3"
+  }
+}
