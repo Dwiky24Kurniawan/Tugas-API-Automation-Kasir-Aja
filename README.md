@@ -18,4 +18,4 @@ How to run
 - npm run test
 - start mochawesome-report/mochawesome.html
 
-Link recording running program : https://drive.google.com/file/d/1QPPeoMH0lrm36EOKGj5k5JF0I6sdHvlo/view?usp=share_link
+Link recording running program : https://drive.google.com/file/d/1xCrW61xvl38yLkXCcwFFGwPm1t0t0NuW/view?usp=share_link
