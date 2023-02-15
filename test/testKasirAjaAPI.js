@@ -34,6 +34,7 @@ describe('Kasir Aja API Test', function () {
             })
     })
 
+    //Endpoint /registration
     //Authorization - Registration
     it('Should successfully create user registration', (done) => {
         request(baseUrl)
@@ -55,6 +56,7 @@ describe('Kasir Aja API Test', function () {
             })
     })
 
+    //Endpoint /authentications
     //Authorization - Login
     it('Should successfully login', (done) => {
         request(baseUrl)
