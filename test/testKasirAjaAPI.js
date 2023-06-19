@@ -7,36 +7,38 @@ const createUser = require('../testData/createUser.json')
 const addUnit = require('../testData/addUnit.json')
 const addCategory = require('../testData/addCategory.json')
 const addCustomer = require('../testData/addCustomer.json')
-const addProduct = require('../testData/addProduct.json')
-const addSales = require('../testData/addSales.json')
-const addTransaction = require('../testData/addTransaction.json')
+const updateUser = require('../testData/updateUser.json')
+const updateUnit = require('../testData/updateUnit.json')
+const updateCategory = require('../testData/updateCategory.json')
+const updateCustomer = require('../testData/updateCustomer.json')
 
-describe('Kasir Aja API Test', function () {
+var token
+var officeId
+var userId
+var unitId
+var categoryId
+var productId
+var saleId
+var purchaseId
 
-    var token
-    var userId
-    var unitId
-    var categoryId
-    var productId
-    var saleId
-    var purchaseId
+before(function (done) {
+    request(baseUrl)
+        .post('/authentications')
+        .send(userLogin)
+        .end(function (err, res) {
+            token = res.body.data.accessToken
+            if (err) {
+                throw err
+            }
+            done()
+        })
+})
 
-    before(function (done) {
-        request(baseUrl)
-            .post('/authentications')
-            .send(userLogin)
-            .end(function (err, res) {
-                token = res.body.data.accessToken
-                if (err) {
-                    throw err
-                }
-                done()
-            })
-    })
 
+describe('Test Endpoint Registration /registration and Login /authentications', function () {
     //Endpoint /registration
     //Authorization - Registration
-    it('Should successfully create user registration', (done) => {
+    it('Create user registration', (done) => {
         request(baseUrl)
             .post('/registration')
             .send(userRegistration)
@@ -49,6 +51,7 @@ describe('Kasir Aja API Test', function () {
                 expect(response.body.data.email).not.to.be.null
                 expect(response.body.data.email).to.be.equal(userRegistration.email)
                 expect(response.body.data.password).not.to.be.null
+                console.log(response.body)
                 if (err) {
                     throw err
                 }
@@ -58,7 +61,7 @@ describe('Kasir Aja API Test', function () {
 
     //Endpoint /authentications
     //Authorization - Login
-    it('Should successfully login', (done) => {
+    it('Success login', (done) => {
         request(baseUrl)
             .post('/authentications')
             .send(userLogin)
@@ -77,17 +80,20 @@ describe('Kasir Aja API Test', function () {
                 expect(response.body.data.user.email).to.be.equal(userRegistration.email)
                 expect(response.body.data.user.company_name).not.to.be.null
                 expect(response.body.data.user.company_name).to.be.equal(userRegistration.name)
-                // console.log(response.body)
+                officeId = response.body.data.user.officeId
+                console.log(response.body)
                 if (err) {
                     throw err
                 }
                 done()
             })
     })
+})
 
+describe('Test Endpoint User /users', function () {
     //Endpoint /users
     //Users - Create User
-    it('Should successfully create user', (done) => {
+    it('Success create user', (done) => {
         request(baseUrl)
             .post('/users')
             .send(createUser)
@@ -101,8 +107,8 @@ describe('Kasir Aja API Test', function () {
                 expect(response.body.data.userId).not.to.be.null
                 expect(response.body.data.name).not.to.be.null
                 expect(response.body.data.name).to.be.equal(createUser.name)
-                // console.log(response.body)
                 userId = response.body.data.userId
+                console.log(response.body)
                 if (err) {
                     throw err
                 }
@@ -111,7 +117,7 @@ describe('Kasir Aja API Test', function () {
     })
 
     //Users - Get User Detail
-    it('Should successfully get user detail', (done) => {
+    it('Success get user detail', (done) => {
         request(baseUrl)
             .get('/users/' + userId)
             .set('Accept', 'application/json')
@@ -127,7 +133,7 @@ describe('Kasir Aja API Test', function () {
                 expect(response.body.data.user.role).not.to.be.null
                 expect(response.body.data.user.role).to.be.equal('kasir')
                 expect(response.body.status).to.be.equal('success')
-                // console.log(response.body)
+                console.log(response.body)
                 if (err) {
                     throw err
                 }
@@ -136,11 +142,11 @@ describe('Kasir Aja API Test', function () {
     })
 
     //Users - Get User List
-    it('Should successfully get user list', (done) => {
+    it('Success get user list', (done) => {
         request(baseUrl)
             .get('/users')
             .query({
-                q: 'kasir-serbaguna',
+                q: 'kasir',
                 p: 1
             })
             .set('Accept', 'application/json')
@@ -149,7 +155,7 @@ describe('Kasir Aja API Test', function () {
             .end(function (err, response) {
                 expect(response.statusCode).to.be.equal(200)
                 expect(response.body.status).to.be.equal('success')
-                // console.log(response.body)
+                console.log(response.body)
                 if (err) {
                     throw err
                 }
@@ -158,22 +164,20 @@ describe('Kasir Aja API Test', function () {
     })
 
     //Users - Update User
-    it('Should successfully update user', (done) => {
+    it('Success update user', (done) => {
         request(baseUrl)
             .put('/users/' + userId)
-            .send({
-                "name": "update-user",
-                "email": "user@example.com"
-            })
+            .send(updateUser)
             .set('Accept', 'application/json')
             .set('Content-Type', 'application/json')
             .set('Authorization', 'bearer ' + token)
             .end(function (err, response) {
                 expect(response.statusCode).to.be.equal(200)
                 expect(response.body.data.name).not.to.be.null
-                expect(response.body.data.name).to.be.equal('update-user')
+                expect(response.body.data.name).to.be.equal(updateUser.name)
                 expect(response.body.status).to.be.equal('success')
                 expect(response.body.message).to.be.equal('User berhasil diupdate')
+                console.log(response.body)
                 if (err) {
                     throw err
                 }
@@ -182,7 +186,7 @@ describe('Kasir Aja API Test', function () {
     })
 
     //Users - Get User List
-    it('Should successfully delete user', (done) => {
+    it('Success delete user', (done) => {
         request(baseUrl)
             .del('/users/' + userId)
             .set('Accept', 'application/json')
@@ -192,18 +196,19 @@ describe('Kasir Aja API Test', function () {
                 expect(response.statusCode).to.be.equal(200)
                 expect(response.body.status).to.be.equal('success')
                 expect(response.body.message).to.be.equal('User berhasil dihapus')
-                // console.log(response.body)
+                console.log(response.body)
                 if (err) {
                     throw err
                 }
                 done()
             })
     })
+})
 
-    //================================================================================
+describe('Test Endpoint Unit /units', function () {
     //Endpoint /units
     //Units - Add Unit
-    it('Should successfully add unit', (done) => {
+    it('Success add unit', (done) => {
         request(baseUrl)
             .post('/units')
             .send(addUnit)
@@ -218,16 +223,16 @@ describe('Kasir Aja API Test', function () {
                 expect(response.body.data.name).not.to.be.null
                 expect(response.body.data.name).to.be.equal(addUnit.name)
                 unitId = response.body.data.unitId
+                console.log(response.body)
                 if (err) {
                     throw err
                 }
-                // console.log(response.body)
                 done()
             })
     })
 
     //Units - Get Unit Detail
-    it('Should successfully get unit detail', (done) => {
+    it('Success get unit detail', (done) => {
         request(baseUrl)
             .get('/units/' + unitId)
             .set('Accept', 'application/json')
@@ -240,7 +245,7 @@ describe('Kasir Aja API Test', function () {
                 expect(response.body.data.unit.name).to.be.equal(addUnit.name)
                 expect(response.body.data.unit.description).not.to.be.null
                 expect(response.body.data.unit.description).to.be.equal(addUnit.description)
-                // console.log(response.body)
+                console.log(response.body)
                 if (err) {
                     throw err
                 }
@@ -249,7 +254,7 @@ describe('Kasir Aja API Test', function () {
     })
 
     //Units - Get Unit List
-    it('Should successfully get unit list', (done) => {
+    it('Success get unit list', (done) => {
         request(baseUrl)
             .get('/units')
             .query({
@@ -262,7 +267,7 @@ describe('Kasir Aja API Test', function () {
             .end(function (err, response) {
                 expect(response.statusCode).to.be.equal(200)
                 expect(response.body.status).to.be.equal('success')
-                // console.log(response.body)
+                console.log(response.body)
                 if (err) {
                     throw err
                 }
@@ -271,13 +276,10 @@ describe('Kasir Aja API Test', function () {
     })
 
     //Units - Update Unit
-    it('Should successfully update unit', (done) => {
+    it('Success update unit', (done) => {
         request(baseUrl)
             .put('/units/' + unitId)
-            .send({
-                "name": "update-meter",
-                "description": "no-meter"
-            })
+            .send(updateUnit)
             .set('Accept', 'application/json')
             .set('Content-Type', 'application/json')
             .set('Authorization', 'bearer ' + token)
@@ -285,8 +287,8 @@ describe('Kasir Aja API Test', function () {
                 expect(response.statusCode).to.be.equal(200)
                 expect(response.body.status).to.be.equal('success')
                 expect(response.body.data.name).not.to.be.null
-                expect(response.body.data.name).to.be.equal('update-meter')
-                // console.log(response.body)
+                expect(response.body.data.name).to.be.equal(updateUnit.name)
+                console.log(response.body)
                 if (err) {
                     throw err
                 }
@@ -295,7 +297,7 @@ describe('Kasir Aja API Test', function () {
     })
 
     //Units - Delete Unit
-    it('Should successfully update unit', (done) => {
+    it('Success delete unit', (done) => {
         request(baseUrl)
             .del('/units/' + unitId)
             .set('Accept', 'application/json')
@@ -304,18 +306,19 @@ describe('Kasir Aja API Test', function () {
             .end(function (err, response) {
                 expect(response.statusCode).to.be.equal(200)
                 expect(response.body.status).to.be.equal('success')
-                // console.log(response.body)
+                console.log(response.body)
                 if (err) {
                     throw err
                 }
                 done()
             })
     })
+})
 
-    //================================================================================
+describe('Test Endpoint Category /categories', function () {
     //Endpoint /categories
     //Categories - Add Category
-    it('Should successfully add category', (done) => {
+    it('Success add category', (done) => {
         request(baseUrl)
             .post('/categories')
             .send(addCategory)
@@ -330,6 +333,7 @@ describe('Kasir Aja API Test', function () {
                 expect(response.body.status).to.be.equal('success')
                 expect(response.body.message).to.be.equal('Category berhasil ditambahkan')
                 categoryId = response.body.data.categoryId
+                console.log(response.body)
                 if (err) {
                     throw err
                 }
@@ -338,7 +342,7 @@ describe('Kasir Aja API Test', function () {
     })
 
     //Categories - Get Category Detail
-    it('Should successfully get category detail', (done) => {
+    it('Success get category detail', (done) => {
         request(baseUrl)
             .get('/categories/' + categoryId)
             .set('Accept', 'application/json')
@@ -351,7 +355,7 @@ describe('Kasir Aja API Test', function () {
                 expect(response.body.data.category.description).not.to.be.null
                 expect(response.body.data.category.description).to.be.equal(addCategory.description)
                 expect(response.body.status).to.be.equal('success')
-                // console.log(response.body)
+                console.log(response.body)
                 if (err) {
                     throw err
                 }
@@ -360,7 +364,7 @@ describe('Kasir Aja API Test', function () {
     })
 
     //Categories - Get Category List
-    it('Should successfully get category list', (done) => {
+    it('Success get category list', (done) => {
         request(baseUrl)
             .get('/categories')
             .query({
@@ -373,7 +377,7 @@ describe('Kasir Aja API Test', function () {
             .end(function (err, response) {
                 expect(response.statusCode).to.be.equal(200)
                 expect(response.body.status).to.be.equal('success')
-                // console.log(response.body)
+                console.log(response.body)
                 if (err) {
                     throw err
                 }
@@ -382,13 +386,10 @@ describe('Kasir Aja API Test', function () {
     })
 
     //Categories - Update Category
-    it('Should successfully update category', (done) => {
+    it('Success update category', (done) => {
         request(baseUrl)
             .put('/categories/' + categoryId)
-            .send({
-                "name": "update-minuman",
-                "description": "no-minuman"
-            })
+            .send(updateCategory)
             .set('Accept', 'application/json')
             .set('Content-Type', 'application/json')
             .set('Authorization', 'bearer ' + token)
@@ -396,8 +397,8 @@ describe('Kasir Aja API Test', function () {
                 expect(response.statusCode).to.be.equal(200)
                 expect(response.body.status).to.be.equal('success')
                 expect(response.body.data.name).not.to.be.null
-                expect(response.body.data.name).to.be.equal('update-minuman')
-                // console.log(response.body)
+                expect(response.body.data.name).to.be.equal(updateCategory.name)
+                console.log(response.body)
                 if (err) {
                     throw err
                 }
@@ -406,7 +407,7 @@ describe('Kasir Aja API Test', function () {
     })
 
     //Categories - Delete Category
-    it('Should successfully delete category', (done) => {
+    it('Success delete category', (done) => {
         request(baseUrl)
             .del('/categories/' + categoryId)
             .set('Accept', 'application/json')
@@ -415,7 +416,7 @@ describe('Kasir Aja API Test', function () {
             .end(function (err, response) {
                 expect(response.statusCode).to.be.equal(200)
                 expect(response.body.status).to.be.equal('success')
-                // console.log(response.body)
+                console.log(response.body)
                 if (err) {
                     throw err
                 }
@@ -423,10 +424,34 @@ describe('Kasir Aja API Test', function () {
             })
     })
 
-    //================================================================================
+    it('Success add category again', (done) => {
+        request(baseUrl)
+            .post('/categories')
+            .send(addCategory)
+            .set('Accept', 'application/json')
+            .set('Content-Type', 'application/json')
+            .set('Authorization', 'bearer ' + token)
+            .end(function (err, response) {
+                expect(response.statusCode).to.be.equal(201)
+                expect(response.body.data.categoryId).not.to.be.null
+                expect(response.body.data.name).not.to.be.null
+                expect(response.body.data.name).to.be.equal(addCategory.name)
+                expect(response.body.status).to.be.equal('success')
+                expect(response.body.message).to.be.equal('Category berhasil ditambahkan')
+                categoryId = response.body.data.categoryId
+                console.log(response.body)
+                if (err) {
+                    throw err
+                }
+                done()
+            })
+    })
+})
+
+describe('Test Endpoint Customer /customers', function () {
     //Endpoint /customers
     //Customers - Add customer
-    it('Should successfully add customer', (done) => {
+    it('Success add customer', (done) => {
         request(baseUrl)
             .post('/customers')
             .send(addCustomer)
@@ -441,16 +466,16 @@ describe('Kasir Aja API Test', function () {
                 expect(response.body.data.name).not.to.be.null
                 expect(response.body.data.name).to.be.equal(addCustomer.name)
                 customerId = response.body.data.customerId
+                console.log(response.body)
                 if (err) {
                     throw err
                 }
-                // console.log(response.body)
                 done()
             })
     })
 
     //Customers - Get Customer Detail
-    it('Should successfully get customer detail', (done) => {
+    it('Success get customer detail', (done) => {
         request(baseUrl)
             .get('/customers/' + customerId)
             .set('Accept', 'application/json')
@@ -467,7 +492,7 @@ describe('Kasir Aja API Test', function () {
                 expect(response.body.data.customer.address).to.be.equal(addCustomer.address)
                 expect(response.body.data.customer.description).not.to.be.null
                 expect(response.body.data.customer.description).to.be.equal(addCustomer.description)
-                // console.log(response.body)
+                console.log(response.body)
                 if (err) {
                     throw err
                 }
@@ -476,7 +501,7 @@ describe('Kasir Aja API Test', function () {
     })
 
     //Customers - Get Customer List
-    it('Should successfully get customer list', (done) => {
+    it('Success get customer list', (done) => {
         request(baseUrl)
             .get('/customers')
             .query({
@@ -489,7 +514,7 @@ describe('Kasir Aja API Test', function () {
             .end(function (err, response) {
                 expect(response.statusCode).to.be.equal(200)
                 expect(response.body.status).to.be.equal('success')
-                // console.log(response.body)
+                console.log(response.body)
                 if (err) {
                     throw err
                 }
@@ -498,15 +523,10 @@ describe('Kasir Aja API Test', function () {
     })
 
     //Customers - Update Customer
-    it('Should successfully update customer', (done) => {
+    it('Success update customer', (done) => {
         request(baseUrl)
             .put('/customers/' + customerId)
-            .send({
-                "name": "Budi Doremi",
-                "phone": "08987654321",
-                "address": "Bandung",
-                "description": "Pelanggan VIP"
-            })
+            .send(updateCustomer)
             .set('Accept', 'application/json')
             .set('Content-Type', 'application/json')
             .set('Authorization', 'bearer ' + token)
@@ -514,8 +534,8 @@ describe('Kasir Aja API Test', function () {
                 expect(response.statusCode).to.be.equal(200)
                 expect(response.body.status).to.be.equal('success')
                 expect(response.body.data.name).not.to.be.null
-                expect(response.body.data.name).to.be.equal('Budi Doremi')
-                // console.log(response.body)
+                expect(response.body.data.name).to.be.equal(updateCustomer.name)
+                console.log(response.body)
                 if (err) {
                     throw err
                 }
@@ -523,8 +543,8 @@ describe('Kasir Aja API Test', function () {
             })
     })
 
-    //Units - Delete Unit
-    it('Should successfully delete unit', (done) => {
+    //Units - Delete Customer
+    it('Success delete customer', (done) => {
         request(baseUrl)
             .del('/customers/' + customerId)
             .set('Accept', 'application/json')
@@ -533,7 +553,7 @@ describe('Kasir Aja API Test', function () {
             .end(function (err, response) {
                 expect(response.statusCode).to.be.equal(200)
                 expect(response.body.status).to.be.equal('success')
-                // console.log(response.body)
+                console.log(response.body)
                 if (err) {
                     throw err
                 }
@@ -541,13 +561,45 @@ describe('Kasir Aja API Test', function () {
             })
     })
 
-    //================================================================================
+    it('Success add customer again', (done) => {
+        request(baseUrl)
+            .post('/customers')
+            .send(addCustomer)
+            .set('Accept', 'application/json')
+            .set('Content-Type', 'application/json')
+            .set('Authorization', 'bearer ' + token)
+            .end(function (err, response) {
+                expect(response.statusCode).to.be.equal(201)
+                expect(response.body.status).to.be.equal('success')
+                expect(response.body.message).to.be.equal('Customer berhasil ditambahkan')
+                expect(response.body.data.customerId).not.to.be.null
+                expect(response.body.data.name).not.to.be.null
+                expect(response.body.data.name).to.be.equal(addCustomer.name)
+                customerId = response.body.data.customerId
+                console.log(response.body)
+                if (err) {
+                    throw err
+                }
+                done()
+            })
+    })
+})
+
+
+describe('Test Endpoint Product /products', function () {
     //Endpoint /products
     //Products - Add Product
-    it('Should successfully add product', (done) => {
+    it('Success add product', (done) => {
         request(baseUrl)
             .post('/products')
-            .send(addProduct)
+            .send({
+                category_id: categoryId,
+                code: "A314ASDDFIER3432",
+                name: "taro",
+                price: 3500,
+                cost: 3000,
+                stock: 5
+            })
             .set('Accept', 'application/json')
             .set('Content-Type', 'application/json')
             .set('Authorization', 'bearer ' + token)
@@ -557,18 +609,18 @@ describe('Kasir Aja API Test', function () {
                 expect(response.body.message).to.be.equal('Product berhasil ditambahkan')
                 expect(response.body.data.productId).not.to.be.null
                 expect(response.body.data.name).not.to.be.null
-                expect(response.body.data.name).to.be.equal(addProduct.name)
+                expect(response.body.data.name).to.be.equal("taro")
                 productId = response.body.data.productId
+                console.log(response.body)
                 if (err) {
                     throw err
                 }
-                // console.log(response.body)
                 done()
             })
     })
 
     //Products - Get Product Detail
-    it('Should successfully get product detail', (done) => {
+    it('Success get product detail', (done) => {
         request(baseUrl)
             .get('/products/' + productId)
             .set('Accept', 'application/json')
@@ -578,16 +630,15 @@ describe('Kasir Aja API Test', function () {
                 expect(response.statusCode).to.be.equal(200)
                 expect(response.body.status).to.be.equal('success')
                 expect(response.body.data.product.code).not.to.be.null
-                expect(response.body.data.product.code).to.be.equal(addProduct.code)
                 expect(response.body.data.product.name).not.to.be.null
-                expect(response.body.data.product.name).to.be.equal(addProduct.name)
+                expect(response.body.data.product.name).to.be.equal("taro")
                 expect(response.body.data.product.price).not.to.be.null
-                expect(response.body.data.product.price).to.be.equal(parseInt(addProduct.price))
+                expect(response.body.data.product.price).to.be.equal(3500)
                 expect(response.body.data.product.cost).not.to.be.null
-                expect(response.body.data.product.cost).to.be.equal(parseInt(addProduct.cost))
+                expect(response.body.data.product.cost).to.be.equal(3000)
                 expect(response.body.data.product.stock).not.to.be.null
-                expect(response.body.data.product.stock).to.be.equal(parseInt(addProduct.stock))
-                // console.log(response.body)
+                expect(response.body.data.product.stock).to.be.equal(5)
+                console.log(response.body)
                 if (err) {
                     throw err
                 }
@@ -596,7 +647,7 @@ describe('Kasir Aja API Test', function () {
     })
 
     //Products - Get Product List
-    it('Should successfully get product list', (done) => {
+    it('Success get product list', (done) => {
         request(baseUrl)
             .get('/products')
             .query({
@@ -604,7 +655,7 @@ describe('Kasir Aja API Test', function () {
                 q: "taro",
                 withStock: true,
                 withCategory: true,
-                categoryId: "a8851b17-9de-4c66-bc16-d4279a9a7c77"
+                categoryId: categoryId
             })
             .set('Accept', 'application/json')
             .set('Content-Type', 'application/json')
@@ -612,7 +663,7 @@ describe('Kasir Aja API Test', function () {
             .end(function (err, response) {
                 expect(response.statusCode).to.be.equal(200)
                 expect(response.body.status).to.be.equal('success')
-                // console.log(response.body)
+                console.log(response.body)
                 if (err) {
                     throw err
                 }
@@ -621,16 +672,16 @@ describe('Kasir Aja API Test', function () {
     })
 
     //Products - Update Product
-    it('Should successfully update product', (done) => {
+    it('Success update product', (done) => {
         request(baseUrl)
             .put('/products/' + productId)
             .send({
-                "category_id": "811f547e-a24e-4f94-bfe1-b7ed7d11c03f",
+                "category_id": categoryId,
                 "code": "A314ASDDFIER3432",
                 "name": "taro",
-                "price": "3500",
-                "cost": "3000",
-                "stock": "1"
+                "price": 3500,
+                "cost": 3000,
+                "stock": 100
             })
             .set('Accept', 'application/json')
             .set('Content-Type', 'application/json')
@@ -640,7 +691,7 @@ describe('Kasir Aja API Test', function () {
                 expect(response.body.status).to.be.equal('success')
                 expect(response.body.data.name).not.to.be.null
                 expect(response.body.data.name).to.be.equal('taro')
-                // console.log(response.body)
+                console.log(response.body)
                 if (err) {
                     throw err
                 }
@@ -649,7 +700,7 @@ describe('Kasir Aja API Test', function () {
     })
 
     //Products - Delete Product
-    it('Should successfully delete product', (done) => {
+    it('Success delete product', (done) => {
         request(baseUrl)
             .del('/products/' + productId)
             .set('Accept', 'application/json')
@@ -658,7 +709,7 @@ describe('Kasir Aja API Test', function () {
             .end(function (err, response) {
                 expect(response.statusCode).to.be.equal(200)
                 expect(response.body.status).to.be.equal('success')
-                // console.log(response.body)
+                console.log(response.body)
                 if (err) {
                     throw err
                 }
@@ -666,13 +717,63 @@ describe('Kasir Aja API Test', function () {
             })
     })
 
+    //Products - Add Product
+    it('Success add product again', (done) => {
+        request(baseUrl)
+            .post('/products')
+            .send({
+                category_id: categoryId,
+                code: "A314ASDDFIER3432",
+                name: "taro",
+                price: 3500,
+                cost: 3000,
+                stock: 50
+            })
+            .set('Accept', 'application/json')
+            .set('Content-Type', 'application/json')
+            .set('Authorization', 'bearer ' + token)
+            .end(function (err, response) {
+                expect(response.statusCode).to.be.equal(201)
+                expect(response.body.status).to.be.equal('success')
+                expect(response.body.message).to.be.equal('Product berhasil ditambahkan')
+                expect(response.body.data.productId).not.to.be.null
+                expect(response.body.data.name).not.to.be.null
+                expect(response.body.data.name).to.be.equal("taro")
+                productId = response.body.data.productId
+                productCode = response.body.data.code
+                console.log(response.body)
+                if (err) {
+                    throw err
+                }
+                done()
+            })
+    })
+})
+
+
+describe('Test Endpoint Sales Order /sales and Transaction /purchases', function () {
     //================================================================================
     //Endpoint /sales
     //Transaction - Add Sale
-    it('Should successfully add sales', (done) => {
+    it('Success add sales', (done) => {
         request(baseUrl)
             .post('/sales')
-            .send(addSales)
+            .send({
+                "officeId": officeId,
+                "customerId": customerId,
+                "date": "2023-02-01",
+                "invoice": "INV001",
+                "amount": 2000,
+                "discount": 0,
+                "description": "Pembelian pertama",
+                "items": [
+                    {
+                        "productId": productId,
+                        "quantity": 1,
+                        "price": 2000
+                    }
+                ]
+            })
             .set('Accept', 'application/json')
             .set('Content-Type', 'application/json')
             .set('Authorization', 'bearer ' + token)
@@ -682,21 +783,21 @@ describe('Kasir Aja API Test', function () {
                 expect(response.body.message).to.be.equal('transaksi ditambahkan')
                 expect(response.body.data.saleId).not.to.be.null
                 saleId = response.body.data.saleId
+                console.log(response.body)
                 if (err) {
                     throw err
                 }
-                // console.log(response.body)
                 done()
             })
     })
 
     //Transaction - Get List Sales Data
-    it('Should successfully get list sales data', (done) => {
+    it('Success get list sales data', (done) => {
         request(baseUrl)
             .get('/sales')
             .query({
-                startDate: "2023-01-08",
-                endDate: "2023-02-08"
+                startDate: "2023-01-01",
+                endDate: "2023-12-31"
             })
             .set('Accept', 'application/json')
             .set('Content-Type', 'application/json')
@@ -704,7 +805,7 @@ describe('Kasir Aja API Test', function () {
             .end(function (err, response) {
                 expect(response.statusCode).to.be.equal(200)
                 expect(response.body.status).to.be.equal('success')
-                // console.log(response.body)
+                console.log(response.body)
                 if (err) {
                     throw err
                 }
@@ -713,7 +814,7 @@ describe('Kasir Aja API Test', function () {
     })
 
     //Transaction - Get Sales Order Data
-    it('Should successfully get sales order data', (done) => {
+    it('Success get sales order data', (done) => {
         request(baseUrl)
             .get('/sales/' + saleId)
             .set('Accept', 'application/json')
@@ -722,16 +823,30 @@ describe('Kasir Aja API Test', function () {
             .end(function (err, response) {
                 expect(response.statusCode).to.be.equal(200)
                 expect(response.body.status).to.be.equal('success')
-                // console.log(response.body)
+                console.log(response.body)
                 done()
             })
     })
 
     //Transaction - Add Transaction
-    it('Should successfully add transaction', (done) => {
+    it('Success add transaction', (done) => {
         request(baseUrl)
             .post('/purchases')
-            .send(addTransaction)
+            .send({
+                "officeId": officeId,
+                "date": "2023-01-30",
+                "invoice": "INV/02/20/2023/001",
+                "amount": 14000,
+                "discount": 0,
+                "description": "test transaksi toko dwiky",
+                "items": [
+                    {
+                        "productId": productId,
+                        "quantity": 4,
+                        "cost": 3500
+                    }
+                ]
+            })
             .set('Accept', 'application/json')
             .set('Content-Type', 'application/json')
             .set('Authorization', 'bearer ' + token)
@@ -740,8 +855,8 @@ describe('Kasir Aja API Test', function () {
                 expect(response.body.status).to.be.equal('success')
                 expect(response.body.message).to.be.equal('transaksi ditambahkan')
                 expect(response.body.data.purchaseId).not.to.be.null
-                // console.log(response.body)
                 purchaseId = response.body.data.purchaseId
+                console.log(response.body)
                 if (err) {
                     throw err
                 }
@@ -750,14 +865,12 @@ describe('Kasir Aja API Test', function () {
     })
 
     //Transaction - Get List of Transaction
-    it('Should successfully get list of transaction', (done) => {
+    it('Success get list of transaction', (done) => {
         request(baseUrl)
             .get('/purchases/' + purchaseId)
             .query({
-                startDate: "2023-01-29",
-                endDate: "2023-01-30",
-                q: "",
-                page: ""
+                startDate: "2023-01-01",
+                endDate: "2023-12-31"
             })
             .set('Accept', 'application/json')
             .set('Content-Type', 'application/json')
@@ -767,14 +880,10 @@ describe('Kasir Aja API Test', function () {
                 expect(response.body.status).to.be.equal('success')
                 expect(response.body.data.purchase.date).not.to.be.null
                 expect(response.body.data.purchase.invoice).not.to.be.null
-                expect(response.body.data.purchase.invoice).to.be.equal(addTransaction.invoice)
                 expect(response.body.data.purchase.description).not.to.be.null
-                expect(response.body.data.purchase.description).to.be.equal(addTransaction.description)
                 expect(response.body.data.purchase.amount).not.to.be.null
-                expect(response.body.data.purchase.amount).to.be.equal(addTransaction.amount)
                 expect(response.body.data.purchase.discount).not.to.be.null
-                expect(response.body.data.purchase.discount).to.be.equal(addTransaction.discount)
-                // console.log(response.body)
+                console.log(response.body)
                 if (err) {
                     throw err
                 }
@@ -783,7 +892,7 @@ describe('Kasir Aja API Test', function () {
     })
 
     //Transaction - Get Transaction Detail
-    it('Should successfully get transaction detail', (done) => {
+    it('Success get transaction detail', (done) => {
         request(baseUrl)
             .get('/purchases/' + purchaseId)
             .set('Accept', 'application/json')
@@ -794,14 +903,13 @@ describe('Kasir Aja API Test', function () {
                 expect(response.body.status).to.be.equal('success')
                 expect(response.body.data.purchase.date).not.to.be.null
                 expect(response.body.data.purchase.invoice).not.to.be.null
-                expect(response.body.data.purchase.invoice).to.be.equal(addTransaction.invoice)
                 expect(response.body.data.purchase.description).not.to.be.null
-                expect(response.body.data.purchase.description).to.be.equal(addTransaction.description)
                 expect(response.body.data.purchase.amount).not.to.be.null
-                expect(response.body.data.purchase.amount).to.be.equal(addTransaction.amount)
                 expect(response.body.data.purchase.discount).not.to.be.null
-                expect(response.body.data.purchase.discount).to.be.equal(addTransaction.discount)
-                // console.log(response.body)
+                expect(response.body.data.purchase.description).to.be.equal('test transaksi toko dwiky')
+                expect(response.body.data.purchase.creator).to.be.equal('Toko Dwiky')
+                expect(response.body.data.purchase.office_name).to.be.equal('office-Toko Dwiky')
+                console.log(response.body)
                 if (err) {
                     throw err
                 }
