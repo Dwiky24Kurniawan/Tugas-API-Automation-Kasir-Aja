@@ -34,7 +34,6 @@ before(function (done) {
         })
 })
 
-
 describe('Test Endpoint Registration /registration and Login /authentications', function () {
     //Endpoint /registration
     //Authorization - Registration
@@ -585,7 +584,6 @@ describe('Test Endpoint Customer /customers', function () {
     })
 })
 
-
 describe('Test Endpoint Product /products', function () {
     //Endpoint /products
     //Products - Add Product
@@ -749,7 +747,6 @@ describe('Test Endpoint Product /products', function () {
             })
     })
 })
-
 
 describe('Test Endpoint Sales Order /sales and Transaction /purchases', function () {
     //================================================================================
