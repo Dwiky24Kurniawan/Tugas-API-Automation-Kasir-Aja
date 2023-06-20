@@ -749,7 +749,6 @@ describe('Test Endpoint Product /products', function () {
 })
 
 describe('Test Endpoint Sales Order /sales and Transaction /purchases', function () {
-    //================================================================================
     //Endpoint /sales
     //Transaction - Add Sale
     it('Success add sales', (done) => {
