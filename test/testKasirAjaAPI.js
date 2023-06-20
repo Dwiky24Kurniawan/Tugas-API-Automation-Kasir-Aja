@@ -37,7 +37,7 @@ before(function (done) {
 describe('Test Endpoint Registration /registration and Login /authentications', function () {
     //Endpoint /registration
     //Authorization - Registration
-    it('Create user registration', (done) => {
+    it('Success create user registration', (done) => {
         request(baseUrl)
             .post('/registration')
             .send(userRegistration)
@@ -92,7 +92,7 @@ describe('Test Endpoint Registration /registration and Login /authentications', 
 describe('Test Endpoint User /users', function () {
     //Endpoint /users
     //Users - Create User
-    it('Success create user', (done) => {
+    it('Success create user cashier', (done) => {
         request(baseUrl)
             .post('/users')
             .send(createUser)
