@@ -60,7 +60,7 @@ describe('Test Endpoint Registration /registration and Login /authentications', 
 
     //Endpoint /authentications
     //Authorization - Login
-    it('Success login', (done) => {
+    it('Success login using valid credential', (done) => {
         request(baseUrl)
             .post('/authentications')
             .send(userLogin)
@@ -80,6 +80,60 @@ describe('Test Endpoint Registration /registration and Login /authentications', 
                 expect(response.body.data.user.company_name).not.to.be.null
                 expect(response.body.data.user.company_name).to.be.equal(userRegistration.name)
                 officeId = response.body.data.user.officeId
+                console.log(response.body)
+                if (err) {
+                    throw err
+                }
+                done()
+            })
+    })
+
+    it('Failed login using invalid credential', (done) => {
+        request(baseUrl)
+            .post('/authentications')
+            .send({
+                "email": "tokonya@dwiky.com",
+                "password": "tokonyadwiky"
+            })
+            .end(function (err, response) {
+                expect(response.statusCode).to.be.equal(401)
+                expect(response.body.status).to.be.equal('fail')
+                expect(response.body.message).to.be.equal('Kredensial yang Anda berikan salah')
+                console.log(response.body)
+                if (err) {
+                    throw err
+                }
+                done()
+            })
+    })
+
+    it('Failed login using invalid email format', (done) => {
+        request(baseUrl)
+            .post('/authentications')
+            .send({
+                "email": "toko@dwiky",
+                "password": "toko24dwiky"
+            })
+            .end(function (err, response) {
+                expect(response.statusCode).to.be.equal(400)
+                expect(response.body.status).to.be.equal('fail')
+                expect(response.body.message).to.be.equal('\"email\" must be a valid email')
+                console.log(response.body)
+                if (err) {
+                    throw err
+                }
+                done()
+            })
+    })
+
+    it('Failed login without any input', (done) => {
+        request(baseUrl)
+            .post('/authentications')
+            .send()
+            .end(function (err, response) {
+                expect(response.statusCode).to.be.equal(400)
+                expect(response.body.status).to.be.equal('fail')
+                expect(response.body.message).to.be.equal('\"value\" must be of type object')
                 console.log(response.body)
                 if (err) {
                     throw err
