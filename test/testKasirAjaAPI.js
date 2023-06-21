@@ -132,7 +132,7 @@ describe('Test Endpoint User /users', function () {
                 expect(response.body.data.user.role).not.to.be.null
                 expect(response.body.data.user.role).to.be.equal('kasir')
                 expect(response.body.status).to.be.equal('success')
-                console.log(response.body)
+                console.log(JSON.stringify(response.body))
                 if (err) {
                     throw err
                 }
@@ -244,7 +244,7 @@ describe('Test Endpoint Unit /units', function () {
                 expect(response.body.data.unit.name).to.be.equal(addUnit.name)
                 expect(response.body.data.unit.description).not.to.be.null
                 expect(response.body.data.unit.description).to.be.equal(addUnit.description)
-                console.log(response.body)
+                console.log(JSON.stringify(response.body))
                 if (err) {
                     throw err
                 }
@@ -354,7 +354,7 @@ describe('Test Endpoint Category /categories', function () {
                 expect(response.body.data.category.description).not.to.be.null
                 expect(response.body.data.category.description).to.be.equal(addCategory.description)
                 expect(response.body.status).to.be.equal('success')
-                console.log(response.body)
+                console.log(JSON.stringify(response.body))
                 if (err) {
                     throw err
                 }
@@ -491,7 +491,7 @@ describe('Test Endpoint Customer /customers', function () {
                 expect(response.body.data.customer.address).to.be.equal(addCustomer.address)
                 expect(response.body.data.customer.description).not.to.be.null
                 expect(response.body.data.customer.description).to.be.equal(addCustomer.description)
-                console.log(response.body)
+                console.log(JSON.stringify(response.body))
                 if (err) {
                     throw err
                 }
@@ -636,7 +636,7 @@ describe('Test Endpoint Product /products', function () {
                 expect(response.body.data.product.cost).to.be.equal(3000)
                 expect(response.body.data.product.stock).not.to.be.null
                 expect(response.body.data.product.stock).to.be.equal(5)
-                console.log(response.body)
+                console.log(JSON.stringify(response.body))
                 if (err) {
                     throw err
                 }
@@ -779,7 +779,7 @@ describe('Test Endpoint Sales Order /sales and Transaction /purchases', function
                 expect(response.body.message).to.be.equal('transaksi ditambahkan')
                 expect(response.body.data.saleId).not.to.be.null
                 saleId = response.body.data.saleId
-                console.log(response.body)
+                console.log(JSON.stringify(response.body))
                 if (err) {
                     throw err
                 }
@@ -801,7 +801,7 @@ describe('Test Endpoint Sales Order /sales and Transaction /purchases', function
             .end(function (err, response) {
                 expect(response.statusCode).to.be.equal(200)
                 expect(response.body.status).to.be.equal('success')
-                console.log(response.body)
+                console.log(JSON.stringify(response.body))
                 if (err) {
                     throw err
                 }
@@ -905,7 +905,7 @@ describe('Test Endpoint Sales Order /sales and Transaction /purchases', function
                 expect(response.body.data.purchase.description).to.be.equal('test transaksi toko dwiky')
                 expect(response.body.data.purchase.creator).to.be.equal('Toko Dwiky')
                 expect(response.body.data.purchase.office_name).to.be.equal('office-Toko Dwiky')
-                console.log(response.body)
+                console.log(JSON.stringify(response.body))
                 if (err) {
                     throw err
                 }
