@@ -17,11 +17,12 @@ var officeId
 var userId
 var unitId
 var categoryId
+var customerId
 var productId
 var saleId
 var purchaseId
 
-before(function (done) {
+beforeEach(function (done) {
     request(baseUrl)
         .post('/authentications')
         .send(userLogin)
@@ -41,16 +42,16 @@ describe('Test Endpoint Registration /registration and Login /authentications', 
         request(baseUrl)
             .post('/registration')
             .send(userRegistration)
-            .end(function (err, response) {
-                expect(response.statusCode).to.be.equal(201)
-                expect(response.body.status).to.be.equal('success')
-                expect(response.body.message).to.be.equal('Toko berhasil didaftarkan')
-                expect(response.body.data.name).not.to.be.null
-                expect(response.body.data.name).to.be.equal(userRegistration.name)
-                expect(response.body.data.email).not.to.be.null
-                expect(response.body.data.email).to.be.equal(userRegistration.email)
-                expect(response.body.data.password).not.to.be.null
-                console.log(response.body)
+            .end(async function (err, response) {
+                expect(await response.statusCode).to.be.equal(201)
+                expect(await response.body.status).to.be.equal('success')
+                expect(await response.body.message).to.be.equal('Toko berhasil didaftarkan')
+                expect(await response.body.data.name).not.to.be.null
+                expect(await response.body.data.name).to.be.equal(userRegistration.name)
+                expect(await response.body.data.email).not.to.be.null
+                expect(await response.body.data.email).to.be.equal(userRegistration.email)
+                expect(await response.body.data.password).not.to.be.null
+                console.log(JSON.stringify(response.body))
                 if (err) {
                     throw err
                 }
@@ -64,23 +65,23 @@ describe('Test Endpoint Registration /registration and Login /authentications', 
         request(baseUrl)
             .post('/authentications')
             .send(userLogin)
-            .end(function (err, response) {
-                expect(response.statusCode).to.be.equal(201)
-                expect(response.body.status).to.be.equal('success')
-                expect(response.body.message).to.be.equal('Authentication berhasil ditambahkan')
-                expect(response.body.data.accessToken).not.to.be.null
-                expect(response.body.data.refreshToken).not.to.be.null
-                expect(response.body.data.user.id).not.to.be.null
-                expect(response.body.data.user.name).not.to.be.null
-                expect(response.body.data.user.name).to.be.equal(userRegistration.name)
-                expect(response.body.data.user.role).not.to.be.null
-                expect(response.body.data.user.role).to.be.equal('admin')
-                expect(response.body.data.user.email).not.to.be.null
-                expect(response.body.data.user.email).to.be.equal(userRegistration.email)
-                expect(response.body.data.user.company_name).not.to.be.null
-                expect(response.body.data.user.company_name).to.be.equal(userRegistration.name)
+            .end(async function (err, response) {
+                expect(await response.statusCode).to.be.equal(201)
+                expect(await response.body.status).to.be.equal('success')
+                expect(await response.body.message).to.be.equal('Authentication berhasil ditambahkan')
+                expect(await response.body.data.accessToken).not.to.be.null
+                expect(await response.body.data.refreshToken).not.to.be.null
+                expect(await response.body.data.user.id).not.to.be.null
+                expect(await response.body.data.user.name).not.to.be.null
+                expect(await response.body.data.user.name).to.be.equal(userRegistration.name)
+                expect(await response.body.data.user.role).not.to.be.null
+                expect(await response.body.data.user.role).to.be.equal('admin')
+                expect(await response.body.data.user.email).not.to.be.null
+                expect(await response.body.data.user.email).to.be.equal(userRegistration.email)
+                expect(await response.body.data.user.company_name).not.to.be.null
+                expect(await response.body.data.user.company_name).to.be.equal(userRegistration.name)
                 officeId = response.body.data.user.officeId
-                console.log(response.body)
+                console.log(JSON.stringify(response.body))
                 if (err) {
                     throw err
                 }
@@ -95,11 +96,11 @@ describe('Test Endpoint Registration /registration and Login /authentications', 
                 "email": "tokonya@dwiky.com",
                 "password": "tokonyadwiky"
             })
-            .end(function (err, response) {
-                expect(response.statusCode).to.be.equal(401)
-                expect(response.body.status).to.be.equal('fail')
-                expect(response.body.message).to.be.equal('Kredensial yang Anda berikan salah')
-                console.log(response.body)
+            .end(async function (err, response) {
+                expect(await response.statusCode).to.be.equal(401)
+                expect(await response.body.status).to.be.equal('fail')
+                expect(await response.body.message).to.be.equal('Kredensial yang Anda berikan salah')
+                console.log(JSON.stringify(response.body))
                 if (err) {
                     throw err
                 }
@@ -114,11 +115,11 @@ describe('Test Endpoint Registration /registration and Login /authentications', 
                 "email": "toko@dwiky",
                 "password": "toko24dwiky"
             })
-            .end(function (err, response) {
-                expect(response.statusCode).to.be.equal(400)
-                expect(response.body.status).to.be.equal('fail')
-                expect(response.body.message).to.be.equal('\"email\" must be a valid email')
-                console.log(response.body)
+            .end(async function (err, response) {
+                expect(await response.statusCode).to.be.equal(400)
+                expect(await response.body.status).to.be.equal('fail')
+                expect(await response.body.message).to.be.equal('\"email\" must be a valid email')
+                console.log(JSON.stringify(response.body))
                 if (err) {
                     throw err
                 }
@@ -130,11 +131,11 @@ describe('Test Endpoint Registration /registration and Login /authentications', 
         request(baseUrl)
             .post('/authentications')
             .send()
-            .end(function (err, response) {
-                expect(response.statusCode).to.be.equal(400)
-                expect(response.body.status).to.be.equal('fail')
-                expect(response.body.message).to.be.equal('\"value\" must be of type object')
-                console.log(response.body)
+            .end(async function (err, response) {
+                expect(await response.statusCode).to.be.equal(400)
+                expect(await response.body.status).to.be.equal('fail')
+                expect(await response.body.message).to.be.equal('\"value\" must be of type object')
+                console.log(JSON.stringify(response.body))
                 if (err) {
                     throw err
                 }
@@ -153,15 +154,15 @@ describe('Test Endpoint User /users', function () {
             .set('Accept', 'application/json')
             .set('Content-Type', 'application/json')
             .set('Authorization', 'bearer ' + token)
-            .end(function (err, response) {
-                expect(response.statusCode).to.be.equal(201)
-                expect(response.body.status).to.be.equal('success')
-                expect(response.body.message).to.be.equal('User berhasil ditambahkan')
-                expect(response.body.data.userId).not.to.be.null
-                expect(response.body.data.name).not.to.be.null
-                expect(response.body.data.name).to.be.equal(createUser.name)
+            .end(async function (err, response) {
+                expect(await response.statusCode).to.be.equal(201)
+                expect(await response.body.status).to.be.equal('success')
+                expect(await response.body.message).to.be.equal('User berhasil ditambahkan')
+                expect(await response.body.data.userId).not.to.be.null
+                expect(await response.body.data.name).not.to.be.null
+                expect(await response.body.data.name).to.be.equal(createUser.name)
                 userId = response.body.data.userId
-                console.log(response.body)
+                console.log(JSON.stringify(response.body))
                 if (err) {
                     throw err
                 }
@@ -176,16 +177,16 @@ describe('Test Endpoint User /users', function () {
             .set('Accept', 'application/json')
             .set('Content-Type', 'application/json')
             .set('Authorization', 'bearer ' + token)
-            .end(function (err, response) {
-                expect(response.statusCode).to.be.equal(200)
-                expect(response.body.data.user.id).not.to.be.null
-                expect(response.body.data.user.name).not.to.be.null
-                expect(response.body.data.user.name).to.be.equal(createUser.name)
-                expect(response.body.data.user.email).not.to.be.null
-                expect(response.body.data.user.email).to.be.equal(createUser.email)
-                expect(response.body.data.user.role).not.to.be.null
-                expect(response.body.data.user.role).to.be.equal('kasir')
-                expect(response.body.status).to.be.equal('success')
+            .end(async function (err, response) {
+                expect(await response.statusCode).to.be.equal(200)
+                expect(await response.body.data.user.id).not.to.be.null
+                expect(await response.body.data.user.name).not.to.be.null
+                expect(await response.body.data.user.name).to.be.equal(createUser.name)
+                expect(await response.body.data.user.email).not.to.be.null
+                expect(await response.body.data.user.email).to.be.equal(createUser.email)
+                expect(await response.body.data.user.role).not.to.be.null
+                expect(await response.body.data.user.role).to.be.equal('kasir')
+                expect(await response.body.status).to.be.equal('success')
                 console.log(JSON.stringify(response.body))
                 if (err) {
                     throw err
@@ -205,10 +206,10 @@ describe('Test Endpoint User /users', function () {
             .set('Accept', 'application/json')
             .set('Content-Type', 'application/json')
             .set('Authorization', 'bearer ' + token)
-            .end(function (err, response) {
-                expect(response.statusCode).to.be.equal(200)
-                expect(response.body.status).to.be.equal('success')
-                console.log(response.body)
+            .end(async function (err, response) {
+                expect(await response.statusCode).to.be.equal(200)
+                expect(await response.body.status).to.be.equal('success')
+                console.log(JSON.stringify(response.body))
                 if (err) {
                     throw err
                 }
@@ -224,13 +225,13 @@ describe('Test Endpoint User /users', function () {
             .set('Accept', 'application/json')
             .set('Content-Type', 'application/json')
             .set('Authorization', 'bearer ' + token)
-            .end(function (err, response) {
-                expect(response.statusCode).to.be.equal(200)
-                expect(response.body.data.name).not.to.be.null
-                expect(response.body.data.name).to.be.equal(updateUser.name)
-                expect(response.body.status).to.be.equal('success')
-                expect(response.body.message).to.be.equal('User berhasil diupdate')
-                console.log(response.body)
+            .end(async function (err, response) {
+                expect(await response.statusCode).to.be.equal(200)
+                expect(await response.body.data.name).not.to.be.null
+                expect(await response.body.data.name).to.be.equal(updateUser.name)
+                expect(await response.body.status).to.be.equal('success')
+                expect(await response.body.message).to.be.equal('User berhasil diupdate')
+                console.log(JSON.stringify(response.body))
                 if (err) {
                     throw err
                 }
@@ -245,11 +246,11 @@ describe('Test Endpoint User /users', function () {
             .set('Accept', 'application/json')
             .set('Content-Type', 'application/json')
             .set('Authorization', 'bearer ' + token)
-            .end(function (err, response) {
-                expect(response.statusCode).to.be.equal(200)
-                expect(response.body.status).to.be.equal('success')
-                expect(response.body.message).to.be.equal('User berhasil dihapus')
-                console.log(response.body)
+            .end(async function (err, response) {
+                expect(await response.statusCode).to.be.equal(200)
+                expect(await response.body.status).to.be.equal('success')
+                expect(await response.body.message).to.be.equal('User berhasil dihapus')
+                console.log(JSON.stringify(response.body))
                 if (err) {
                     throw err
                 }
@@ -268,15 +269,15 @@ describe('Test Endpoint Unit /units', function () {
             .set('Accept', 'application/json')
             .set('Content-Type', 'application/json')
             .set('Authorization', 'bearer ' + token)
-            .end(function (err, response) {
-                expect(response.statusCode).to.be.equal(201)
-                expect(response.body.status).to.be.equal('success')
-                expect(response.body.message).to.be.equal('Unit berhasil ditambahkan')
-                expect(response.body.data.unitId).not.to.be.null
-                expect(response.body.data.name).not.to.be.null
-                expect(response.body.data.name).to.be.equal(addUnit.name)
+            .end(async function (err, response) {
+                expect(await response.statusCode).to.be.equal(201)
+                expect(await response.body.status).to.be.equal('success')
+                expect(await response.body.message).to.be.equal('Unit berhasil ditambahkan')
+                expect(await response.body.data.unitId).not.to.be.null
+                expect(await response.body.data.name).not.to.be.null
+                expect(await response.body.data.name).to.be.equal(addUnit.name)
                 unitId = response.body.data.unitId
-                console.log(response.body)
+                console.log(JSON.stringify(response.body))
                 if (err) {
                     throw err
                 }
@@ -291,13 +292,13 @@ describe('Test Endpoint Unit /units', function () {
             .set('Accept', 'application/json')
             .set('Content-Type', 'application/json')
             .set('Authorization', 'bearer ' + token)
-            .end(function (err, response) {
-                expect(response.statusCode).to.be.equal(200)
-                expect(response.body.status).to.be.equal('success')
-                expect(response.body.data.unit.name).not.to.be.null
-                expect(response.body.data.unit.name).to.be.equal(addUnit.name)
-                expect(response.body.data.unit.description).not.to.be.null
-                expect(response.body.data.unit.description).to.be.equal(addUnit.description)
+            .end(async function (err, response) {
+                expect(await response.statusCode).to.be.equal(200)
+                expect(await response.body.status).to.be.equal('success')
+                expect(await response.body.data.unit.name).not.to.be.null
+                expect(await response.body.data.unit.name).to.be.equal(addUnit.name)
+                expect(await response.body.data.unit.description).not.to.be.null
+                expect(await response.body.data.unit.description).to.be.equal(addUnit.description)
                 console.log(JSON.stringify(response.body))
                 if (err) {
                     throw err
@@ -317,10 +318,10 @@ describe('Test Endpoint Unit /units', function () {
             .set('Accept', 'application/json')
             .set('Content-Type', 'application/json')
             .set('Authorization', 'bearer ' + token)
-            .end(function (err, response) {
-                expect(response.statusCode).to.be.equal(200)
-                expect(response.body.status).to.be.equal('success')
-                console.log(response.body)
+            .end(async function (err, response) {
+                expect(await response.statusCode).to.be.equal(200)
+                expect(await response.body.status).to.be.equal('success')
+                console.log(JSON.stringify(response.body))
                 if (err) {
                     throw err
                 }
@@ -336,12 +337,12 @@ describe('Test Endpoint Unit /units', function () {
             .set('Accept', 'application/json')
             .set('Content-Type', 'application/json')
             .set('Authorization', 'bearer ' + token)
-            .end(function (err, response) {
-                expect(response.statusCode).to.be.equal(200)
-                expect(response.body.status).to.be.equal('success')
-                expect(response.body.data.name).not.to.be.null
-                expect(response.body.data.name).to.be.equal(updateUnit.name)
-                console.log(response.body)
+            .end(async function (err, response) {
+                expect(await response.statusCode).to.be.equal(200)
+                expect(await response.body.status).to.be.equal('success')
+                expect(await response.body.data.name).not.to.be.null
+                expect(await response.body.data.name).to.be.equal(updateUnit.name)
+                console.log(JSON.stringify(response.body))
                 if (err) {
                     throw err
                 }
@@ -356,10 +357,10 @@ describe('Test Endpoint Unit /units', function () {
             .set('Accept', 'application/json')
             .set('Content-Type', 'application/json')
             .set('Authorization', 'bearer ' + token)
-            .end(function (err, response) {
-                expect(response.statusCode).to.be.equal(200)
-                expect(response.body.status).to.be.equal('success')
-                console.log(response.body)
+            .end(async function (err, response) {
+                expect(await response.statusCode).to.be.equal(200)
+                expect(await response.body.status).to.be.equal('success')
+                console.log(JSON.stringify(response.body))
                 if (err) {
                     throw err
                 }
@@ -378,15 +379,15 @@ describe('Test Endpoint Category /categories', function () {
             .set('Accept', 'application/json')
             .set('Content-Type', 'application/json')
             .set('Authorization', 'bearer ' + token)
-            .end(function (err, response) {
-                expect(response.statusCode).to.be.equal(201)
-                expect(response.body.data.categoryId).not.to.be.null
-                expect(response.body.data.name).not.to.be.null
-                expect(response.body.data.name).to.be.equal(addCategory.name)
-                expect(response.body.status).to.be.equal('success')
-                expect(response.body.message).to.be.equal('Category berhasil ditambahkan')
+            .end(async function (err, response) {
+                expect(await response.statusCode).to.be.equal(201)
+                expect(await response.body.data.categoryId).not.to.be.null
+                expect(await response.body.data.name).not.to.be.null
+                expect(await response.body.data.name).to.be.equal(addCategory.name)
+                expect(await response.body.status).to.be.equal('success')
+                expect(await response.body.message).to.be.equal('Category berhasil ditambahkan')
                 categoryId = response.body.data.categoryId
-                console.log(response.body)
+                console.log(JSON.stringify(response.body))
                 if (err) {
                     throw err
                 }
@@ -401,13 +402,13 @@ describe('Test Endpoint Category /categories', function () {
             .set('Accept', 'application/json')
             .set('Content-Type', 'application/json')
             .set('Authorization', 'bearer ' + token)
-            .end(function (err, response) {
-                expect(response.statusCode).to.be.equal(200)
-                expect(response.body.data.category.name).not.to.be.null
-                expect(response.body.data.category.name).to.be.equal(addCategory.name)
-                expect(response.body.data.category.description).not.to.be.null
-                expect(response.body.data.category.description).to.be.equal(addCategory.description)
-                expect(response.body.status).to.be.equal('success')
+            .end(async function (err, response) {
+                expect(await response.statusCode).to.be.equal(200)
+                expect(await response.body.data.category.name).not.to.be.null
+                expect(await response.body.data.category.name).to.be.equal(addCategory.name)
+                expect(await response.body.data.category.description).not.to.be.null
+                expect(await response.body.data.category.description).to.be.equal(addCategory.description)
+                expect(await response.body.status).to.be.equal('success')
                 console.log(JSON.stringify(response.body))
                 if (err) {
                     throw err
@@ -427,10 +428,10 @@ describe('Test Endpoint Category /categories', function () {
             .set('Accept', 'application/json')
             .set('Content-Type', 'application/json')
             .set('Authorization', 'bearer ' + token)
-            .end(function (err, response) {
-                expect(response.statusCode).to.be.equal(200)
-                expect(response.body.status).to.be.equal('success')
-                console.log(response.body)
+            .end(async function (err, response) {
+                expect(await response.statusCode).to.be.equal(200)
+                expect(await response.body.status).to.be.equal('success')
+                console.log(JSON.stringify(response.body))
                 if (err) {
                     throw err
                 }
@@ -446,12 +447,12 @@ describe('Test Endpoint Category /categories', function () {
             .set('Accept', 'application/json')
             .set('Content-Type', 'application/json')
             .set('Authorization', 'bearer ' + token)
-            .end(function (err, response) {
-                expect(response.statusCode).to.be.equal(200)
-                expect(response.body.status).to.be.equal('success')
-                expect(response.body.data.name).not.to.be.null
-                expect(response.body.data.name).to.be.equal(updateCategory.name)
-                console.log(response.body)
+            .end(async function (err, response) {
+                expect(await response.statusCode).to.be.equal(200)
+                expect(await response.body.status).to.be.equal('success')
+                expect(await response.body.data.name).not.to.be.null
+                expect(await response.body.data.name).to.be.equal(updateCategory.name)
+                console.log(JSON.stringify(response.body))
                 if (err) {
                     throw err
                 }
@@ -466,10 +467,10 @@ describe('Test Endpoint Category /categories', function () {
             .set('Accept', 'application/json')
             .set('Content-Type', 'application/json')
             .set('Authorization', 'bearer ' + token)
-            .end(function (err, response) {
-                expect(response.statusCode).to.be.equal(200)
-                expect(response.body.status).to.be.equal('success')
-                console.log(response.body)
+            .end(async function (err, response) {
+                expect(await response.statusCode).to.be.equal(200)
+                expect(await response.body.status).to.be.equal('success')
+                console.log(JSON.stringify(response.body))
                 if (err) {
                     throw err
                 }
@@ -484,15 +485,15 @@ describe('Test Endpoint Category /categories', function () {
             .set('Accept', 'application/json')
             .set('Content-Type', 'application/json')
             .set('Authorization', 'bearer ' + token)
-            .end(function (err, response) {
-                expect(response.statusCode).to.be.equal(201)
-                expect(response.body.data.categoryId).not.to.be.null
-                expect(response.body.data.name).not.to.be.null
-                expect(response.body.data.name).to.be.equal(addCategory.name)
-                expect(response.body.status).to.be.equal('success')
-                expect(response.body.message).to.be.equal('Category berhasil ditambahkan')
+            .end(async function (err, response) {
+                expect(await response.statusCode).to.be.equal(201)
+                expect(await response.body.data.categoryId).not.to.be.null
+                expect(await response.body.data.name).not.to.be.null
+                expect(await response.body.data.name).to.be.equal(addCategory.name)
+                expect(await response.body.status).to.be.equal('success')
+                expect(await response.body.message).to.be.equal('Category berhasil ditambahkan')
                 categoryId = response.body.data.categoryId
-                console.log(response.body)
+                console.log(JSON.stringify(response.body))
                 if (err) {
                     throw err
                 }
@@ -511,15 +512,15 @@ describe('Test Endpoint Customer /customers', function () {
             .set('Accept', 'application/json')
             .set('Content-Type', 'application/json')
             .set('Authorization', 'bearer ' + token)
-            .end(function (err, response) {
-                expect(response.statusCode).to.be.equal(201)
-                expect(response.body.status).to.be.equal('success')
-                expect(response.body.message).to.be.equal('Customer berhasil ditambahkan')
-                expect(response.body.data.customerId).not.to.be.null
-                expect(response.body.data.name).not.to.be.null
-                expect(response.body.data.name).to.be.equal(addCustomer.name)
+            .end(async function (err, response) {
+                expect(await response.statusCode).to.be.equal(201)
+                expect(await response.body.status).to.be.equal('success')
+                expect(await response.body.message).to.be.equal('Customer berhasil ditambahkan')
+                expect(await response.body.data.customerId).not.to.be.null
+                expect(await response.body.data.name).not.to.be.null
+                expect(await response.body.data.name).to.be.equal(addCustomer.name)
                 customerId = response.body.data.customerId
-                console.log(response.body)
+                console.log(JSON.stringify(response.body))
                 if (err) {
                     throw err
                 }
@@ -534,17 +535,17 @@ describe('Test Endpoint Customer /customers', function () {
             .set('Accept', 'application/json')
             .set('Content-Type', 'application/json')
             .set('Authorization', 'bearer ' + token)
-            .end(function (err, response) {
-                expect(response.statusCode).to.be.equal(200)
-                expect(response.body.status).to.be.equal('success')
-                expect(response.body.data.customer.name).not.to.be.null
-                expect(response.body.data.customer.name).to.be.equal(addCustomer.name)
-                expect(response.body.data.customer.phone).not.to.be.null
-                expect(response.body.data.customer.phone).to.be.equal(addCustomer.phone)
-                expect(response.body.data.customer.address).not.to.be.null
-                expect(response.body.data.customer.address).to.be.equal(addCustomer.address)
-                expect(response.body.data.customer.description).not.to.be.null
-                expect(response.body.data.customer.description).to.be.equal(addCustomer.description)
+            .end(async function (err, response) {
+                expect(await response.statusCode).to.be.equal(200)
+                expect(await response.body.status).to.be.equal('success')
+                expect(await response.body.data.customer.name).not.to.be.null
+                expect(await response.body.data.customer.name).to.be.equal(addCustomer.name)
+                expect(await response.body.data.customer.phone).not.to.be.null
+                expect(await response.body.data.customer.phone).to.be.equal(addCustomer.phone)
+                expect(await response.body.data.customer.address).not.to.be.null
+                expect(await response.body.data.customer.address).to.be.equal(addCustomer.address)
+                expect(await response.body.data.customer.description).not.to.be.null
+                expect(await response.body.data.customer.description).to.be.equal(addCustomer.description)
                 console.log(JSON.stringify(response.body))
                 if (err) {
                     throw err
@@ -564,10 +565,10 @@ describe('Test Endpoint Customer /customers', function () {
             .set('Accept', 'application/json')
             .set('Content-Type', 'application/json')
             .set('Authorization', 'bearer ' + token)
-            .end(function (err, response) {
-                expect(response.statusCode).to.be.equal(200)
-                expect(response.body.status).to.be.equal('success')
-                console.log(response.body)
+            .end(async function (err, response) {
+                expect(await response.statusCode).to.be.equal(200)
+                expect(await response.body.status).to.be.equal('success')
+                console.log(JSON.stringify(response.body))
                 if (err) {
                     throw err
                 }
@@ -583,12 +584,12 @@ describe('Test Endpoint Customer /customers', function () {
             .set('Accept', 'application/json')
             .set('Content-Type', 'application/json')
             .set('Authorization', 'bearer ' + token)
-            .end(function (err, response) {
-                expect(response.statusCode).to.be.equal(200)
-                expect(response.body.status).to.be.equal('success')
-                expect(response.body.data.name).not.to.be.null
-                expect(response.body.data.name).to.be.equal(updateCustomer.name)
-                console.log(response.body)
+            .end(async function (err, response) {
+                expect(await response.statusCode).to.be.equal(200)
+                expect(await response.body.status).to.be.equal('success')
+                expect(await response.body.data.name).not.to.be.null
+                expect(await response.body.data.name).to.be.equal(updateCustomer.name)
+                console.log(JSON.stringify(response.body))
                 if (err) {
                     throw err
                 }
@@ -603,10 +604,10 @@ describe('Test Endpoint Customer /customers', function () {
             .set('Accept', 'application/json')
             .set('Content-Type', 'application/json')
             .set('Authorization', 'bearer ' + token)
-            .end(function (err, response) {
-                expect(response.statusCode).to.be.equal(200)
-                expect(response.body.status).to.be.equal('success')
-                console.log(response.body)
+            .end(async function (err, response) {
+                expect(await response.statusCode).to.be.equal(200)
+                expect(await response.body.status).to.be.equal('success')
+                console.log(JSON.stringify(response.body))
                 if (err) {
                     throw err
                 }
@@ -621,15 +622,15 @@ describe('Test Endpoint Customer /customers', function () {
             .set('Accept', 'application/json')
             .set('Content-Type', 'application/json')
             .set('Authorization', 'bearer ' + token)
-            .end(function (err, response) {
-                expect(response.statusCode).to.be.equal(201)
-                expect(response.body.status).to.be.equal('success')
-                expect(response.body.message).to.be.equal('Customer berhasil ditambahkan')
-                expect(response.body.data.customerId).not.to.be.null
-                expect(response.body.data.name).not.to.be.null
-                expect(response.body.data.name).to.be.equal(addCustomer.name)
+            .end(async function (err, response) {
+                expect(await response.statusCode).to.be.equal(201)
+                expect(await response.body.status).to.be.equal('success')
+                expect(await response.body.message).to.be.equal('Customer berhasil ditambahkan')
+                expect(await response.body.data.customerId).not.to.be.null
+                expect(await response.body.data.name).not.to.be.null
+                expect(await response.body.data.name).to.be.equal(addCustomer.name)
                 customerId = response.body.data.customerId
-                console.log(response.body)
+                console.log(JSON.stringify(response.body))
                 if (err) {
                     throw err
                 }
@@ -655,15 +656,15 @@ describe('Test Endpoint Product /products', function () {
             .set('Accept', 'application/json')
             .set('Content-Type', 'application/json')
             .set('Authorization', 'bearer ' + token)
-            .end(function (err, response) {
-                expect(response.statusCode).to.be.equal(201)
-                expect(response.body.status).to.be.equal('success')
-                expect(response.body.message).to.be.equal('Product berhasil ditambahkan')
-                expect(response.body.data.productId).not.to.be.null
-                expect(response.body.data.name).not.to.be.null
-                expect(response.body.data.name).to.be.equal("taro")
+            .end(async function (err, response) {
+                expect(await response.statusCode).to.be.equal(201)
+                expect(await response.body.status).to.be.equal('success')
+                expect(await response.body.message).to.be.equal('Product berhasil ditambahkan')
+                expect(await response.body.data.productId).not.to.be.null
+                expect(await response.body.data.name).not.to.be.null
+                expect(await response.body.data.name).to.be.equal("taro")
                 productId = response.body.data.productId
-                console.log(response.body)
+                console.log(JSON.stringify(response.body))
                 if (err) {
                     throw err
                 }
@@ -678,18 +679,18 @@ describe('Test Endpoint Product /products', function () {
             .set('Accept', 'application/json')
             .set('Content-Type', 'application/json')
             .set('Authorization', 'bearer ' + token)
-            .end(function (err, response) {
-                expect(response.statusCode).to.be.equal(200)
-                expect(response.body.status).to.be.equal('success')
-                expect(response.body.data.product.code).not.to.be.null
-                expect(response.body.data.product.name).not.to.be.null
-                expect(response.body.data.product.name).to.be.equal("taro")
-                expect(response.body.data.product.price).not.to.be.null
-                expect(response.body.data.product.price).to.be.equal(3500)
-                expect(response.body.data.product.cost).not.to.be.null
-                expect(response.body.data.product.cost).to.be.equal(3000)
-                expect(response.body.data.product.stock).not.to.be.null
-                expect(response.body.data.product.stock).to.be.equal(5)
+            .end(async function (err, response) {
+                expect(await response.statusCode).to.be.equal(200)
+                expect(await response.body.status).to.be.equal('success')
+                expect(await response.body.data.product.code).not.to.be.null
+                expect(await response.body.data.product.name).not.to.be.null
+                expect(await response.body.data.product.name).to.be.equal("taro")
+                expect(await response.body.data.product.price).not.to.be.null
+                expect(await response.body.data.product.price).to.be.equal(3500)
+                expect(await response.body.data.product.cost).not.to.be.null
+                expect(await response.body.data.product.cost).to.be.equal(3000)
+                expect(await response.body.data.product.stock).not.to.be.null
+                expect(await response.body.data.product.stock).to.be.equal(5)
                 console.log(JSON.stringify(response.body))
                 if (err) {
                     throw err
@@ -712,10 +713,10 @@ describe('Test Endpoint Product /products', function () {
             .set('Accept', 'application/json')
             .set('Content-Type', 'application/json')
             .set('Authorization', 'bearer ' + token)
-            .end(function (err, response) {
-                expect(response.statusCode).to.be.equal(200)
-                expect(response.body.status).to.be.equal('success')
-                console.log(response.body)
+            .end(async function (err, response) {
+                expect(await response.statusCode).to.be.equal(200)
+                expect(await response.body.status).to.be.equal('success')
+                console.log(JSON.stringify(response.body))
                 if (err) {
                     throw err
                 }
@@ -738,12 +739,12 @@ describe('Test Endpoint Product /products', function () {
             .set('Accept', 'application/json')
             .set('Content-Type', 'application/json')
             .set('Authorization', 'bearer ' + token)
-            .end(function (err, response) {
-                expect(response.statusCode).to.be.equal(200)
-                expect(response.body.status).to.be.equal('success')
-                expect(response.body.data.name).not.to.be.null
-                expect(response.body.data.name).to.be.equal('taro')
-                console.log(response.body)
+            .end(async function (err, response) {
+                expect(await response.statusCode).to.be.equal(200)
+                expect(await response.body.status).to.be.equal('success')
+                expect(await response.body.data.name).not.to.be.null
+                expect(await response.body.data.name).to.be.equal('taro')
+                console.log(JSON.stringify(response.body))
                 if (err) {
                     throw err
                 }
@@ -758,10 +759,10 @@ describe('Test Endpoint Product /products', function () {
             .set('Accept', 'application/json')
             .set('Content-Type', 'application/json')
             .set('Authorization', 'bearer ' + token)
-            .end(function (err, response) {
-                expect(response.statusCode).to.be.equal(200)
-                expect(response.body.status).to.be.equal('success')
-                console.log(response.body)
+            .end(async function (err, response) {
+                expect(await response.statusCode).to.be.equal(200)
+                expect(await response.body.status).to.be.equal('success')
+                console.log(JSON.stringify(response.body))
                 if (err) {
                     throw err
                 }
@@ -784,16 +785,16 @@ describe('Test Endpoint Product /products', function () {
             .set('Accept', 'application/json')
             .set('Content-Type', 'application/json')
             .set('Authorization', 'bearer ' + token)
-            .end(function (err, response) {
-                expect(response.statusCode).to.be.equal(201)
-                expect(response.body.status).to.be.equal('success')
-                expect(response.body.message).to.be.equal('Product berhasil ditambahkan')
-                expect(response.body.data.productId).not.to.be.null
-                expect(response.body.data.name).not.to.be.null
-                expect(response.body.data.name).to.be.equal("taro")
+            .end(async function (err, response) {
+                expect(await response.statusCode).to.be.equal(201)
+                expect(await response.body.status).to.be.equal('success')
+                expect(await response.body.message).to.be.equal('Product berhasil ditambahkan')
+                expect(await response.body.data.productId).not.to.be.null
+                expect(await response.body.data.name).not.to.be.null
+                expect(await response.body.data.name).to.be.equal("taro")
                 productId = response.body.data.productId
                 productCode = response.body.data.code
-                console.log(response.body)
+                console.log(JSON.stringify(response.body))
                 if (err) {
                     throw err
                 }
@@ -827,11 +828,11 @@ describe('Test Endpoint Sales Order /sales and Transaction /purchases', function
             .set('Accept', 'application/json')
             .set('Content-Type', 'application/json')
             .set('Authorization', 'bearer ' + token)
-            .end(function (err, response) {
-                expect(response.statusCode).to.be.equal(201)
-                expect(response.body.status).to.be.equal('success')
-                expect(response.body.message).to.be.equal('transaksi ditambahkan')
-                expect(response.body.data.saleId).not.to.be.null
+            .end(async function (err, response) {
+                expect(await response.statusCode).to.be.equal(201)
+                expect(await response.body.status).to.be.equal('success')
+                expect(await response.body.message).to.be.equal('transaksi ditambahkan')
+                expect(await response.body.data.saleId).not.to.be.null
                 saleId = response.body.data.saleId
                 console.log(JSON.stringify(response.body))
                 if (err) {
@@ -852,9 +853,9 @@ describe('Test Endpoint Sales Order /sales and Transaction /purchases', function
             .set('Accept', 'application/json')
             .set('Content-Type', 'application/json')
             .set('Authorization', 'bearer ' + token)
-            .end(function (err, response) {
-                expect(response.statusCode).to.be.equal(200)
-                expect(response.body.status).to.be.equal('success')
+            .end(async function (err, response) {
+                expect(await response.statusCode).to.be.equal(200)
+                expect(await response.body.status).to.be.equal('success')
                 console.log(JSON.stringify(response.body))
                 if (err) {
                     throw err
@@ -870,10 +871,10 @@ describe('Test Endpoint Sales Order /sales and Transaction /purchases', function
             .set('Accept', 'application/json')
             .set('Content-Type', 'application/json')
             .set('Authorization', 'bearer ' + token)
-            .end(function (err, response) {
-                expect(response.statusCode).to.be.equal(200)
-                expect(response.body.status).to.be.equal('success')
-                console.log(response.body)
+            .end(async function (err, response) {
+                expect(await response.statusCode).to.be.equal(200)
+                expect(await response.body.status).to.be.equal('success')
+                console.log(JSON.stringify(response.body))
                 done()
             })
     })
@@ -900,13 +901,13 @@ describe('Test Endpoint Sales Order /sales and Transaction /purchases', function
             .set('Accept', 'application/json')
             .set('Content-Type', 'application/json')
             .set('Authorization', 'bearer ' + token)
-            .end(function (err, response) {
-                expect(response.statusCode).to.be.equal(201)
-                expect(response.body.status).to.be.equal('success')
-                expect(response.body.message).to.be.equal('transaksi ditambahkan')
-                expect(response.body.data.purchaseId).not.to.be.null
+            .end(async function (err, response) {
+                expect(await response.statusCode).to.be.equal(201)
+                expect(await response.body.status).to.be.equal('success')
+                expect(await response.body.message).to.be.equal('transaksi ditambahkan')
+                expect(await response.body.data.purchaseId).not.to.be.null
                 purchaseId = response.body.data.purchaseId
-                console.log(response.body)
+                console.log(JSON.stringify(response.body))
                 if (err) {
                     throw err
                 }
@@ -925,15 +926,15 @@ describe('Test Endpoint Sales Order /sales and Transaction /purchases', function
             .set('Accept', 'application/json')
             .set('Content-Type', 'application/json')
             .set('Authorization', 'bearer ' + token)
-            .end(function (err, response) {
-                expect(response.statusCode).to.be.equal(200)
-                expect(response.body.status).to.be.equal('success')
-                expect(response.body.data.purchase.date).not.to.be.null
-                expect(response.body.data.purchase.invoice).not.to.be.null
-                expect(response.body.data.purchase.description).not.to.be.null
-                expect(response.body.data.purchase.amount).not.to.be.null
-                expect(response.body.data.purchase.discount).not.to.be.null
-                console.log(response.body)
+            .end(async function (err, response) {
+                expect(await response.statusCode).to.be.equal(200)
+                expect(await response.body.status).to.be.equal('success')
+                expect(await response.body.data.purchase.date).not.to.be.null
+                expect(await response.body.data.purchase.invoice).not.to.be.null
+                expect(await response.body.data.purchase.description).not.to.be.null
+                expect(await response.body.data.purchase.amount).not.to.be.null
+                expect(await response.body.data.purchase.discount).not.to.be.null
+                console.log(JSON.stringify(response.body))
                 if (err) {
                     throw err
                 }
@@ -948,17 +949,17 @@ describe('Test Endpoint Sales Order /sales and Transaction /purchases', function
             .set('Accept', 'application/json')
             .set('Content-Type', 'application/json')
             .set('Authorization', 'bearer ' + token)
-            .end(function (err, response) {
-                expect(response.statusCode).to.be.equal(200)
-                expect(response.body.status).to.be.equal('success')
-                expect(response.body.data.purchase.date).not.to.be.null
-                expect(response.body.data.purchase.invoice).not.to.be.null
-                expect(response.body.data.purchase.description).not.to.be.null
-                expect(response.body.data.purchase.amount).not.to.be.null
-                expect(response.body.data.purchase.discount).not.to.be.null
-                expect(response.body.data.purchase.description).to.be.equal('test transaksi toko dwiky')
-                expect(response.body.data.purchase.creator).to.be.equal('Toko Dwiky')
-                expect(response.body.data.purchase.office_name).to.be.equal('office-Toko Dwiky')
+            .end(async function (err, response) {
+                expect(await response.statusCode).to.be.equal(200)
+                expect(await response.body.status).to.be.equal('success')
+                expect(await response.body.data.purchase.date).not.to.be.null
+                expect(await response.body.data.purchase.invoice).not.to.be.null
+                expect(await response.body.data.purchase.description).not.to.be.null
+                expect(await response.body.data.purchase.amount).not.to.be.null
+                expect(await response.body.data.purchase.discount).not.to.be.null
+                expect(await response.body.data.purchase.description).to.be.equal('test transaksi toko dwiky')
+                expect(await response.body.data.purchase.creator).to.be.equal('Toko Dwiky')
+                expect(await response.body.data.purchase.office_name).to.be.equal('office-Toko Dwiky')
                 console.log(JSON.stringify(response.body))
                 if (err) {
                     throw err
