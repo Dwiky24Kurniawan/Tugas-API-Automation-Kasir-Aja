@@ -3,7 +3,7 @@ const { expect } = require('chai')
 const baseUrl = 'https://kasir-api.belajarqa.com'
 const userRegistration = require('../testData/userRegistration.json')
 const userLogin = require('../testData/userLogin.json')
-const createUser = require('../testData/createUser.json')
+const addUser = require('../testData/addUser.json')
 const addUnit = require('../testData/addUnit.json')
 const addCategory = require('../testData/addCategory.json')
 const addCustomer = require('../testData/addCustomer.json')
@@ -150,7 +150,7 @@ describe('Test Endpoint User /users', function () {
     it('Success create user cashier', (done) => {
         request(baseUrl)
             .post('/users')
-            .send(createUser)
+            .send(addUser)
             .set('Accept', 'application/json')
             .set('Content-Type', 'application/json')
             .set('Authorization', 'bearer ' + token)
@@ -160,7 +160,7 @@ describe('Test Endpoint User /users', function () {
                 expect(await response.body.message).to.be.equal('User berhasil ditambahkan')
                 expect(await response.body.data.userId).not.to.be.null
                 expect(await response.body.data.name).not.to.be.null
-                expect(await response.body.data.name).to.be.equal(createUser.name)
+                expect(await response.body.data.name).to.be.equal(addUser.name)
                 userId = response.body.data.userId
                 console.log(JSON.stringify(response.body))
                 if (err) {
@@ -179,14 +179,14 @@ describe('Test Endpoint User /users', function () {
             .set('Authorization', 'bearer ' + token)
             .end(async function (err, response) {
                 expect(await response.statusCode).to.be.equal(200)
+                expect(await response.body.status).to.be.equal('success')
                 expect(await response.body.data.user.id).not.to.be.null
                 expect(await response.body.data.user.name).not.to.be.null
-                expect(await response.body.data.user.name).to.be.equal(createUser.name)
+                expect(await response.body.data.user.name).to.be.equal(addUser.name)
                 expect(await response.body.data.user.email).not.to.be.null
-                expect(await response.body.data.user.email).to.be.equal(createUser.email)
+                expect(await response.body.data.user.email).to.be.equal(addUser.email)
                 expect(await response.body.data.user.role).not.to.be.null
                 expect(await response.body.data.user.role).to.be.equal('kasir')
-                expect(await response.body.status).to.be.equal('success')
                 console.log(JSON.stringify(response.body))
                 if (err) {
                     throw err
@@ -227,10 +227,10 @@ describe('Test Endpoint User /users', function () {
             .set('Authorization', 'bearer ' + token)
             .end(async function (err, response) {
                 expect(await response.statusCode).to.be.equal(200)
-                expect(await response.body.data.name).not.to.be.null
-                expect(await response.body.data.name).to.be.equal(updateUser.name)
                 expect(await response.body.status).to.be.equal('success')
                 expect(await response.body.message).to.be.equal('User berhasil diupdate')
+                expect(await response.body.data.name).not.to.be.null
+                expect(await response.body.data.name).to.be.equal(updateUser.name)
                 console.log(JSON.stringify(response.body))
                 if (err) {
                     throw err
@@ -239,7 +239,7 @@ describe('Test Endpoint User /users', function () {
             })
     })
 
-    //Users - Get User List
+    //Users - Delete User
     it('Success delete user', (done) => {
         request(baseUrl)
             .del('/users/' + userId)
@@ -381,11 +381,11 @@ describe('Test Endpoint Category /categories', function () {
             .set('Authorization', 'bearer ' + token)
             .end(async function (err, response) {
                 expect(await response.statusCode).to.be.equal(201)
+                expect(await response.body.status).to.be.equal('success')
+                expect(await response.body.message).to.be.equal('Category berhasil ditambahkan')
                 expect(await response.body.data.categoryId).not.to.be.null
                 expect(await response.body.data.name).not.to.be.null
                 expect(await response.body.data.name).to.be.equal(addCategory.name)
-                expect(await response.body.status).to.be.equal('success')
-                expect(await response.body.message).to.be.equal('Category berhasil ditambahkan')
                 categoryId = response.body.data.categoryId
                 console.log(JSON.stringify(response.body))
                 if (err) {
@@ -404,11 +404,11 @@ describe('Test Endpoint Category /categories', function () {
             .set('Authorization', 'bearer ' + token)
             .end(async function (err, response) {
                 expect(await response.statusCode).to.be.equal(200)
+                expect(await response.body.status).to.be.equal('success')
                 expect(await response.body.data.category.name).not.to.be.null
                 expect(await response.body.data.category.name).to.be.equal(addCategory.name)
                 expect(await response.body.data.category.description).not.to.be.null
                 expect(await response.body.data.category.description).to.be.equal(addCategory.description)
-                expect(await response.body.status).to.be.equal('success')
                 console.log(JSON.stringify(response.body))
                 if (err) {
                     throw err
@@ -487,11 +487,11 @@ describe('Test Endpoint Category /categories', function () {
             .set('Authorization', 'bearer ' + token)
             .end(async function (err, response) {
                 expect(await response.statusCode).to.be.equal(201)
+                expect(await response.body.status).to.be.equal('success')
+                expect(await response.body.message).to.be.equal('Category berhasil ditambahkan')
                 expect(await response.body.data.categoryId).not.to.be.null
                 expect(await response.body.data.name).not.to.be.null
                 expect(await response.body.data.name).to.be.equal(addCategory.name)
-                expect(await response.body.status).to.be.equal('success')
-                expect(await response.body.message).to.be.equal('Category berhasil ditambahkan')
                 categoryId = response.body.data.categoryId
                 console.log(JSON.stringify(response.body))
                 if (err) {
