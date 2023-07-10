@@ -39,4 +39,4 @@ npx mocha test\testKasirAjaAPI.js --reporter mochawesome
 start mochawesome-report/mochawesome.html
 ```
 
-Link screen recorded running program : https://drive.google.com/file/d/1kO72agC_BB0Z_zGW48Tl7f2VXTKutPtg/view?usp=sharing
+Link screen recording of running program : https://drive.google.com/file/d/1kO72agC_BB0Z_zGW48Tl7f2VXTKutPtg/view?usp=sharing
